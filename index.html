@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Psych — Unit 1 Trainer</title>
+<style>
+  :root{
+    --ink: #EFE9DD;
+    --ink-dim: #A7A093;
+    --bg: #12161F;
+    --bg-raised: #191F2C;
+    --bg-card: #1E2534;
+    --line: #2A3245;
+    --gold: #C9A24B;
+    --teal: #5C9C93;
+    --coral: #D2694F;
+    --serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(201,162,75,0.08), transparent),
+      radial-gradient(ellipse 700px 600px at 100% 10%, rgba(92,156,147,0.07), transparent),
+      var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    min-height:100vh;
+    padding:32px 20px 80px;
+  }
+  .wrap{max-width:880px; margin:0 auto;}
+
+  /* header */
+  header{margin-bottom:36px; position:relative;}
+  .eyebrow{
+    font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--teal); font-weight:600; margin-bottom:10px;
+  }
+  h1{
+    font-family:var(--serif); font-size:clamp(28px,5vw,42px); font-weight:400;
+    margin:0 0 8px; line-height:1.15; color:var(--ink);
+  }
+  h1 em{color:var(--gold); font-style:normal;}
+  .sub{color:var(--ink-dim); font-size:15px; max-width:560px; line-height:1.5;}
+
+  /* synapse rule — signature element */
+  .synapse{
+    display:flex; align-items:center; gap:6px; margin:22px 0 0;
+  }
+  .synapse .node{width:6px; height:6px; border-radius:50%; background:var(--line);}
+  .synapse .node.on{background:var(--gold); box-shadow:0 0 8px rgba(201,162,75,0.6);}
+  .synapse .wire{flex:1; height:1px; background:var(--line);}
+
+  /* mode tabs */
+  .modes{display:flex; gap:8px; margin:28px 0 22px; flex-wrap:wrap;}
+  .modebtn{
+    font-family:var(--sans); font-size:13px; font-weight:600;
+    background:transparent; color:var(--ink-dim); border:1px solid var(--line);
+    padding:9px 16px; border-radius:999px; cursor:pointer; transition:all .15s ease;
+  }
+  .modebtn:hover{border-color:var(--gold); color:var(--ink);}
+  .modebtn.active{background:var(--gold); color:#1a1408; border-color:var(--gold);}
+
+  /* category filter */
+  .cats{display:flex; gap:6px; margin-bottom:24px; flex-wrap:wrap;}
+  .catbtn{
+    font-size:12px; font-family:var(--sans); background:var(--bg-raised);
+    color:var(--ink-dim); border:1px solid var(--line); padding:6px 12px;
+    border-radius:6px; cursor:pointer;
+  }
+  .catbtn.active{color:var(--ink); border-color:var(--teal); background:rgba(92,156,147,0.12);}
+
+  section{display:none;}
+  section.active{display:block;}
+
+  /* FLASHCARDS */
+  .deck-status{color:var(--ink-dim); font-size:13px; margin-bottom:14px;}
+  .card{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:14px;
+    padding:44px 32px 40px; min-height:220px; max-height:560px; display:flex; flex-direction:column;
+    justify-content:center; cursor:pointer; position:relative; overflow-y:auto;
+    transition: border-color .2s ease;
+  }
+  .card:hover{border-color:var(--teal);}
+  .card .tag{
+    position:absolute; top:18px; left:32px; font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--teal);
+  }
+  .card .face.term{
+    font-family:var(--serif); font-size:clamp(22px,3.8vw,30px); line-height:1.3; color:var(--gold);
+  }
+  .card .face.def{color:var(--ink); font-size:15px; font-family:var(--sans); display:none;}
+  .card .flip-hint{
+    position:absolute; bottom:14px; right:20px; font-size:11px; color:var(--ink-dim);
+    background:var(--bg-card); padding:2px 6px;
+  }
+  .card.flipped{justify-content:flex-start; cursor:pointer;}
+  .card.flipped .face.term{display:none;}
+  .card.flipped .face.def{display:block;}
+
+  .def-block{margin-bottom:18px;}
+  .def-block:last-child{margin-bottom:0;}
+  .def-label{
+    font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--teal);
+    margin-bottom:6px; font-weight:700;
+  }
+  .def-text{
+    font-family:var(--serif); font-size:18px; line-height:1.5; margin:0; color:var(--ink);
+  }
+  .def-detail{
+    font-size:14.5px; line-height:1.65; margin:0; color:var(--ink-dim);
+  }
+  .def-examples{margin:0; padding-left:18px; display:flex; flex-direction:column; gap:8px;}
+  .def-examples li{font-size:14px; line-height:1.55; color:var(--ink);}
+
+  .deck-nav{display:flex; justify-content:space-between; align-items:center; margin-top:18px;}
+  .navbtn{
+    background:var(--bg-raised); border:1px solid var(--line); color:var(--ink);
+    padding:10px 18px; border-radius:8px; cursor:pointer; font-size:14px; font-weight:600;
+  }
+  .navbtn:hover{border-color:var(--gold);}
+  .navbtn:disabled{opacity:.35; cursor:default;}
+  .dots{display:flex; gap:5px; flex-wrap:wrap; max-width:260px;}
+  .dots span{width:6px; height:6px; border-radius:50%; background:var(--line);}
+  .dots span.seen{background:var(--teal);}
+  .dots span.current{background:var(--gold);}
+
+  /* QUIZ */
+  .quiz-status{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;}
+  .quiz-status .count{color:var(--ink-dim); font-size:13px;}
+  .quiz-status .score{color:var(--gold); font-size:13px; font-weight:600;}
+  .progressbar{height:3px; background:var(--line); border-radius:3px; margin-bottom:26px; overflow:hidden;}
+  .progressbar .fill{height:100%; background:var(--gold); transition:width .3s ease;}
+
+  .scenario{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:14px;
+    padding:28px 26px; margin-bottom:20px;
+  }
+  .scenario .label{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--coral); margin-bottom:10px;}
+  .scenario p{font-family:var(--serif); font-size:19px; line-height:1.5; margin:0; color:var(--ink);}
+
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .opt{
+    text-align:left; background:var(--bg-raised); border:1px solid var(--line);
+    color:var(--ink); padding:14px 18px; border-radius:10px; font-size:15px;
+    cursor:pointer; font-family:var(--sans); transition:all .15s ease;
+  }
+  .opt:hover:not(:disabled){border-color:var(--teal);}
+  .opt:disabled{cursor:default;}
+  .opt.correct{border-color:var(--teal); background:rgba(92,156,147,0.15); color:var(--teal);}
+  .opt.wrong{border-color:var(--coral); background:rgba(210,105,79,0.15); color:var(--coral);}
+
+  .feedback{margin-top:16px; font-size:14px; line-height:1.6; color:var(--ink-dim); display:none;}
+  .feedback.show{display:block;}
+  .feedback b{color:var(--gold); font-family:var(--sans);}
+
+  .quiznav{display:flex; justify-content:flex-end; margin-top:18px;}
+
+  .done{
+    text-align:center; padding:50px 20px;
+  }
+  .done h2{font-family:var(--serif); font-size:32px; color:var(--gold); margin-bottom:8px; font-weight:400;}
+  .done p{color:var(--ink-dim); margin-bottom:24px;}
+
+  /* TYPE THE TERM */
+  .prompt-card{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:14px;
+    padding:28px 26px; margin-bottom:20px;
+  }
+  .prompt-card .label{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); margin-bottom:10px;}
+  .prompt-card p{font-family:var(--serif); font-size:19px; line-height:1.5; margin:0; color:var(--ink);}
+
+  .type-form{display:flex; gap:10px; margin-bottom:14px;}
+  .type-input{
+    flex:1; background:var(--bg-raised); border:1px solid var(--line); color:var(--ink);
+    padding:14px 16px; border-radius:10px; font-size:16px; font-family:var(--sans);
+    outline:none; transition:border-color .15s ease;
+  }
+  .type-input:focus{border-color:var(--gold);}
+  .type-input.correct{border-color:var(--teal); background:rgba(92,156,147,0.12);}
+  .type-input.wrong{border-color:var(--coral); background:rgba(210,105,79,0.12);}
+  .checkbtn{
+    background:var(--gold); color:#1a1408; border:none; font-weight:700;
+    padding:0 22px; border-radius:10px; cursor:pointer; font-size:14px;
+  }
+  .checkbtn:disabled{opacity:.4; cursor:default;}
+
+  .type-feedback{font-size:14px; line-height:1.6; color:var(--ink-dim); display:none; margin-bottom:14px;}
+  .type-feedback.show{display:block;}
+  .type-feedback .verdict{font-weight:700; font-family:var(--sans);}
+  .type-feedback .verdict.right{color:var(--teal);}
+  .type-feedback .verdict.close{color:var(--gold);}
+  .type-feedback .verdict.miss{color:var(--coral);}
+  .type-feedback b{color:var(--gold);}
+
+  .sources{
+    margin-top:56px; border-top:1px solid var(--line); padding-top:22px;
+  }
+  .sources-title{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); margin-bottom:10px;}
+  .sources ul{list-style:none; padding:0; margin:0 0 12px; display:flex; flex-direction:column; gap:6px;}
+  .sources a{color:var(--ink); font-size:14px; text-decoration:none; border-bottom:1px dotted var(--ink-dim);}
+  .sources a:hover{color:var(--gold); border-color:var(--gold);}
+  .sources-note{color:var(--ink-dim); font-size:12.5px; line-height:1.6; max-width:600px;}
+  .sources-note em{color:var(--gold); font-style:normal;}
+
+  footer{margin-top:30px; text-align:center; color:var(--ink-dim); font-size:12px;}
+  @media (max-width:520px){
+    .card{padding:26px 20px; min-height:190px;}
+    .scenario{padding:22px 18px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">AP Psychology · Unit 1</div>
+    <h1>History &amp; <em>Approaches</em></h1>
+    <p class="sub">29 terms, application-first. Flip through definitions, then test yourself against scenarios like the ones your test will actually use.</p>
+    <div class="synapse">
+      <div class="node on"></div><div class="wire"></div>
+      <div class="node"></div><div class="wire"></div>
+      <div class="node on"></div><div class="wire"></div>
+      <div class="node"></div>
+    </div>
+  </header>
+
+  <div class="modes">
+    <button class="modebtn active" data-mode="cards">Flashcards</button>
+    <button class="modebtn" data-mode="quiz">Multiple Choice</button>
+    <button class="modebtn" data-mode="type">Type the Term</button>
+  </div>
+
+  <div class="cats" id="cats"></div>
+
+  <section id="cardsSection" class="active">
+    <div class="deck-status" id="deckStatus"></div>
+    <div class="card" id="card">
+      <div class="tag" id="cardTag">SUBFIELD</div>
+      <div class="face term" id="cardTerm"></div>
+      <div class="face def" id="cardDefFace">
+        <div class="def-block">
+          <div class="def-label">Definition</div>
+          <p class="def-text" id="cardDef"></p>
+        </div>
+        <div class="def-block">
+          <div class="def-label">Explanation</div>
+          <p class="def-detail" id="cardDetail"></p>
+        </div>
+        <div class="def-block">
+          <div class="def-label">Examples</div>
+          <ol class="def-examples" id="cardExamples"></ol>
+        </div>
+      </div>
+      <div class="flip-hint">tap to flip</div>
+    </div>
+    <div class="deck-nav">
+      <button class="navbtn" id="prevBtn">← Prev</button>
+      <div class="dots" id="dots"></div>
+      <button class="navbtn" id="nextBtn">Next →</button>
+    </div>
+  </section>
+
+  <section id="quizSection">
+    <div class="quiz-status">
+      <span class="count" id="quizCount"></span>
+      <span class="score" id="quizScore"></span>
+    </div>
+    <div class="progressbar"><div class="fill" id="progFill" style="width:0%"></div></div>
+
+    <div id="quizBody"></div>
+  </section>
+
+  <section id="typeSection">
+    <div class="quiz-status">
+      <span class="count" id="typeCount"></span>
+      <span class="score" id="typeScore"></span>
+    </div>
+    <div class="progressbar"><div class="fill" id="typeProgFill" style="width:0%"></div></div>
+
+    <div id="typeBody"></div>
+  </section>
+
+  <div class="sources">
+    <div class="sources-title">Sources used for these definitions &amp; examples</div>
+    <ul>
+      <li><a href="https://openstax.org/books/psychology-2e/pages/1-1-what-is-psychology" target="_blank" rel="noopener">OpenStax Psychology 2e — 1.1 What Is Psychology?</a></li>
+      <li><a href="https://openstax.org/books/psychology-2e/pages/1-3-contemporary-psychology" target="_blank" rel="noopener">OpenStax Psychology 2e — 1.3 Contemporary Psychology (subfields)</a></li>
+      <li><a href="https://www.simplypsychology.org/perspectives.html" target="_blank" rel="noopener">Simply Psychology — Psychological Approaches/Perspectives</a></li>
+      <li><a href="https://www.verywellmind.com/branches-of-psychology-2794958" target="_blank" rel="noopener">Verywell Mind — Branches of Psychology</a></li>
+    </ul>
+    <p class="sources-note">These are free, peer-reviewed / editorially-reviewed sources — good for cross-checking, but your teacher wants the <em>book</em> definition, so confirm final wording against your actual Bernstein textbook or class notes before submitting.</p>
+  </div>
+
+  <footer>30/30 terms · flashcards reshuffle each mode switch · quiz order randomized · typing mode allows minor spelling errors</footer>
+</div>
+
+<script>
+const DATA = [
+  // FOUNDATIONS
+  {term:"Psychology", cat:"Key Concepts", def:"The scientific study of behavior and mental processes.",
+   detail:"Psychology only became its own scientific field in the late 1800s, before that the mind was studied under philosophy. What makes it a science rather than just opinion is the scientific method: psychologists form hypotheses, run controlled studies, and revise their conclusions based on evidence rather than intuition. It covers both what's directly observable (behavior, like actions and reactions) and what isn't directly observable (mental processes, like thoughts, emotions, and memories), which is why definitions always pair the two words together.",
+   examples:["A psychologist runs a study measuring both how fast people react to a stimulus (behavior) and what they report feeling during the task (mental process) — capturing both halves of the definition at once.","When your brother asks 'why do people procrastinate,' any answer grounded in research rather than guesswork — whether about brain chemistry, habits, or thought patterns — falls under psychology's umbrella."],
+   scenario:"A researcher designs a controlled experiment to measure both what people do (their observable actions) and what they report thinking or feeling.", options:["Psychology","Neuroscience","Cognitive approach","Quantitative psychologists"], answer:0,
+   explain:"'Behavior AND mental processes,' studied scientifically, is the textbook definition of psychology as a whole field — everything else on this list is a branch or lens within it."},
+  // SUBFIELDS
+  {term:"Positive psychology", cat:"Subfields", def:"Studies what makes life fulfilling — strengths, happiness, and well-being — rather than only what goes wrong.",
+   detail:"This is a relatively newer branch (formalized by Martin Seligman around 2000) that pushed back against psychology's historical focus on only diagnosing and fixing what's wrong. Instead of asking 'what's broken,' it asks 'what's going right, and how do we get more of it.' It studies things like gratitude, resilience, optimism, meaning, and flow states — and tries to build interventions that boost well-being even in people who aren't struggling with any disorder.",
+   examples:["A positive psychologist studies why people who regularly write gratitude journals report higher happiness scores months later.","A school implements a 'strengths-based' program teaching students to identify and build on what they're naturally good at, instead of only remediating weaknesses."],
+   scenario:"A researcher surveys thousands of adults to find out which daily habits predict long-term life satisfaction, not to treat any disorder.", options:["Positive psychology","Clinical psychologists","Health psychologists","Personality psychology"], answer:0,
+   explain:"The focus on flourishing and satisfaction (not fixing a problem) is the signature of positive psychology."},
+  {term:"Biological psychologists", cat:"Subfields", def:"Study how the brain, nervous system, genes, and hormones produce behavior and mental processes.",
+   detail:"Also called biopsychologists or physiological psychologists, these researchers assume that every thought, feeling, and behavior has a physical basis somewhere in the body — usually the brain, but also hormones, genetics, and the nervous system. They often use tools like brain scans (fMRI, EEG), genetic studies, or animal research to find the physical mechanism behind a psychological phenomenon.",
+   examples:["A biological psychologist studies identical twins raised apart to see how much of their personality overlap is genetic versus environmental.","A biological psychologist investigates how low levels of the neurotransmitter serotonin are linked to symptoms of depression."],
+   scenario:"A scientist scans participants' brains with an fMRI to see which regions activate when they feel fear.", options:["Biological psychologists","Cognitive psychologists","Neuroscience researcher only","Quantitative psychologists"], answer:0,
+   explain:"Linking a physical brain structure to a behavior/emotion is the core method of biological psychology."},
+  {term:"Cognitive psychologists", cat:"Subfields", def:"Study internal mental processes: memory, perception, problem-solving, language, and thinking.",
+   detail:"Cognitive psychology emerged in the 1950s-60s partly as a reaction against behaviorism, which refused to study anything unobservable. Cognitive psychologists argue you can't fully explain behavior without looking at what's happening inside the mind — how information is taken in, stored, retrieved, and used. This subfield often overlaps heavily with the cognitive approach (the two are closely linked, since this subfield essentially specializes in applying that lens).",
+   examples:["A cognitive psychologist studies how chunking information (like breaking a phone number into groups) improves short-term memory.","A cognitive psychologist researches why multitasking while driving and texting dramatically slows reaction time, even though people believe they're handling it fine."],
+   scenario:"A psychologist tests how well people remember a list of words depending on whether they studied them in silence or with background music.", options:["Cognitive psychologists","Biological psychologists","Educational psychologists","Engineering psychology"], answer:0,
+   explain:"Memory is a mental process — squarely cognitive territory."},
+  {term:"Engineering psychology", cat:"Subfields", def:"Also called human factors psychology — designs machines, tools, and environments to fit human abilities and limits.",
+   detail:"Also called human factors psychology, this subfield sits at the intersection of psychology, design, and safety. The core idea is that humans have predictable cognitive and physical limits (attention span, reaction time, field of vision), so instead of blaming 'human error' when something goes wrong, engineering psychologists redesign the system or tool to match how humans actually think and perceive.",
+   examples:["An engineering psychologist redesigns a nuclear power plant's control panel after research shows operators kept confusing two similar-looking warning lights.","An engineering psychologist helps design a smartphone interface so the most-used buttons are placed where a thumb naturally rests."],
+   scenario:"A psychologist is hired by an airline to redesign the cockpit control layout so pilots make fewer errors under stress.", options:["Engineering psychology","Industrial and organizational psychologists","Environmental psychologists","Health psychologists"], answer:0,
+   explain:"Designing equipment around human capability is the defining task of engineering/human-factors psychology."},
+  {term:"Developmental psychology", cat:"Subfields", def:"Studies how people change physically, cognitively, and socially across the entire lifespan.",
+   detail:"This subfield studies change across the entire lifespan — not just childhood, but infancy through old age. It covers physical development (motor skills, puberty, aging), cognitive development (how thinking changes, like Piaget's stages), and social/emotional development (attachment, identity, relationships). A key debate in this field is nature vs. nurture — how much of development is driven by biology versus environment and experience.",
+   examples:["A developmental psychologist studies how attachment styles formed in infancy (secure vs. insecure) predict relationship patterns decades later in adulthood.","A developmental psychologist researches how memory and reasoning ability typically change as people move into their 70s and 80s."],
+   scenario:"A researcher follows the same group of children from age 2 to age 18, tracking how their language skills change over time.", options:["Developmental psychology","School psychologists","Educational psychologists","Personality psychology"], answer:0,
+   explain:"Tracking change across the lifespan — even just childhood — is developmental psychology's core question."},
+  {term:"Personality psychology", cat:"Subfields", def:"Studies stable individual differences in patterns of thinking, feeling, and behaving.",
+   detail:"This subfield focuses on relatively stable, consistent patterns that make each person distinct — the traits that show up across different situations and over time. A well-known framework here is the Big Five (openness, conscientiousness, extraversion, agreeableness, neuroticism). Personality psychologists debate how much personality is fixed at birth (temperament) versus shaped by experience, and how consistent a trait really is across very different situations.",
+   examples:["A personality psychologist studies whether people who score high in conscientiousness are more likely to stick with long-term goals like finishing college.","A personality psychologist develops a questionnaire to measure how introverted or extraverted someone is based on their answers to everyday scenarios."],
+   scenario:"A psychologist gives job applicants a Big Five trait survey to see how conscientious or extraverted each candidate tends to be.", options:["Personality psychology","Industrial and organizational psychologists","Quantitative psychologists","Social psychologists"], answer:0,
+   explain:"Measuring stable traits (not a specific workplace outcome) is personality psychology; note the trap — I/O would apply this data, but the trait test itself is personality psych's tool."},
+  {term:"Clinical psychologists", cat:"Subfields", def:"Assess, diagnose, and treat mental, emotional, and behavioral disorders.",
+   detail:"This is the largest and most well-known applied subfield. Clinical psychologists are trained to assess (often using structured interviews or tests), diagnose (using manuals like the DSM-5), and treat mental health conditions, usually through therapy. Unlike psychiatrists, most clinical psychologists cannot prescribe medication (rules vary by state), so they primarily use talk-based treatments like CBT (cognitive behavioral therapy).",
+   examples:["A clinical psychologist uses exposure therapy to gradually help a client overcome a diagnosed phobia of flying.","A clinical psychologist conducts a structured diagnostic interview to determine whether a patient meets the criteria for generalized anxiety disorder."],
+   scenario:"A psychologist meets weekly with a client to treat their diagnosed panic disorder using cognitive behavioral therapy.", options:["Clinical psychologists","Community psychologists","Health psychologists","Forensic psychologists"], answer:0,
+   explain:"Diagnosing and treating an individual's disorder directly is the clinical psychologist's job."},
+  {term:"Community psychologists", cat:"Subfields", def:"Work to prevent psychological problems and promote well-being at the level of neighborhoods and communities.",
+   detail:"This subfield operates on a bigger scale than one-on-one therapy — instead of treating individuals after problems appear, community psychologists focus on prevention and system-level change, often targeting risk factors like poverty, lack of resources, or social isolation before they turn into individual crises. They frequently work with schools, nonprofits, or local governments rather than in a private therapy office.",
+   examples:["A community psychologist partners with a city to build more public parks and community centers after research links green space access to lower rates of youth violence.","A community psychologist designs a peer-support network in a low-income neighborhood to catch signs of family crisis early, before they escalate."],
+   scenario:"A psychologist designs a city-wide after-school program aimed at preventing gang involvement before it starts.", options:["Community psychologists","Clinical psychologists","Social psychologists","School psychologists"], answer:0,
+   explain:"Prevention aimed at a whole community (not one client) is the community psychologist's scale of work."},
+  {term:"Health psychologists", cat:"Subfields", def:"Study how psychological factors (stress, habits, attitudes) influence physical health and illness.",
+   detail:"This subfield sits at the crossroads of the mind and the body — studying how thoughts, emotions, and behaviors (like stress, diet, or exercise habits) affect physical illness and recovery, and vice versa. It's grounded in the idea that health isn't purely biological; psychological and social factors matter just as much (this is sometimes called the biopsychosocial model).",
+   examples:["A health psychologist studies why patients who feel more in control of their diagnosis tend to recover faster from surgery.","A health psychologist designs a smoking-cessation program that addresses the psychological triggers (stress, social habits) behind relapse, not just the physical addiction."],
+   scenario:"A researcher studies why chronic work stress is linked to higher rates of heart disease.", options:["Health psychologists","Clinical psychologists","Biological psychologists","Sports psychologists"], answer:0,
+   explain:"Connecting a psychological factor (stress) to a physical illness outcome is health psychology."},
+  {term:"Educational psychologists", cat:"Subfields", def:"Study how people learn and evaluate/improve teaching methods and curricula.",
+   detail:"This subfield is research-focused, studying how learning happens in general and using that research to improve teaching methods, curricula, and educational policy at a broad level — often working with school districts, textbook publishers, or researchers rather than one student at a time (that one-on-one role belongs to school psychologists instead).",
+   examples:["An educational psychologist runs a large study comparing spaced repetition versus cramming to see which produces better long-term retention across thousands of students.","An educational psychologist helps a school district redesign its math curriculum based on research showing visual aids improve comprehension."],
+   scenario:"A researcher compares two different teaching methods to see which one produces better test scores across many classrooms.", options:["Educational psychologists","School psychologists","Developmental psychology","Cognitive psychologists"], answer:0,
+   explain:"Evaluating teaching methods broadly (research-focused) is educational psychology, distinct from working with individual students (school psychology)."},
+  {term:"School psychologists", cat:"Subfields", def:"Work directly inside schools, addressing individual students' learning, behavioral, and emotional issues.",
+   detail:"Unlike educational psychologists (who study learning broadly), school psychologists work directly inside a specific school with specific students — assessing learning disabilities, behavioral issues, or emotional struggles, and often working with teachers and parents to create individualized support plans (like IEPs).",
+   examples:["A school psychologist administers an IQ and achievement test to determine if a struggling student qualifies for special education services.","A school psychologist works with a teacher to create a behavior plan for a student who is frequently disruptive in class."],
+   scenario:"A psychologist at a middle school administers tests to determine if a specific student qualifies for special education services.", options:["School psychologists","Educational psychologists","Clinical psychologists","Developmental psychology"], answer:0,
+   explain:"Working one-on-one with a specific student inside the school building is school psychology."},
+  {term:"Social psychologists", cat:"Subfields", def:"Study how the presence, opinions, or behavior of other people influence an individual's thoughts and actions.",
+   detail:"This subfield studies the powerful, often surprising ways other people shape our thoughts and actions — even when we don't realize it. Classic topics include conformity (Asch's line experiments), obedience (Milgram's shock experiments), group behavior, prejudice, persuasion, and how we form impressions of others. The core idea: situations and social context often predict behavior better than personality does.",
+   examples:["A social psychologist studies how people are more likely to help a stranger in an emergency when they're alone versus when surrounded by a crowd (the bystander effect).","A social psychologist researches how quickly people conform to an obviously wrong answer just because a group of others gave that same wrong answer first."],
+   scenario:"A researcher has participants give an answer they know is wrong, just to see if they'll conform after hearing a group of others give that same wrong answer.", options:["Social psychologists","Community psychologists","Personality psychology","Industrial and organizational psychologists"], answer:0,
+   explain:"Conformity driven by other people's influence is the classic social psychology scenario (Asch)."},
+  {term:"Industrial and organizational psychologists", cat:"Subfields", def:"Apply psychology to the workplace — hiring, training, productivity, and employee morale.",
+   detail:"Often shortened to 'I/O psychology,' this subfield splits into two halves: the 'industrial' side focuses on selecting and evaluating employees (hiring tests, performance reviews), while the 'organizational' side focuses on workplace dynamics (morale, leadership, teamwork, job satisfaction). It's one of the more lucrative applied psychology careers, often working directly for corporations.",
+   examples:["An I/O psychologist develops a structured interview process to more fairly and accurately predict which job candidates will succeed.","An I/O psychologist studies why employees who feel their manager listens to them report significantly higher job satisfaction."],
+   scenario:"A psychologist redesigns a company's onboarding process after research shows it improves new-hire retention.", options:["Industrial and organizational psychologists","Engineering psychology","Quantitative psychologists","Health psychologists"], answer:0,
+   explain:"Improving a company process tied to employees and workplace outcomes is I/O psychology."},
+  {term:"Quantitative psychologists", cat:"Subfields", def:"Develop and refine the statistical methods and measurement tools used to analyze psychological data.",
+   detail:"This is one of the more behind-the-scenes subfields — quantitative psychologists don't usually study a specific behavior themselves; instead, they build and refine the statistical tools, measurement scales, and research methods that every other subfield relies on to make sure their studies and tests are valid and reliable.",
+   examples:["A quantitative psychologist develops a new statistical method to correct for bias in how survey questions are worded.","A quantitative psychologist works to determine the ideal number of questions needed on a personality test to make it both accurate and quick to take."],
+   scenario:"A psychologist creates a new statistical model to more accurately score a widely-used depression screening survey.", options:["Quantitative psychologists","Cognitive psychologists","Personality psychology","Biological psychologists"], answer:0,
+   explain:"Building the measurement/statistical tool itself (not using it to study a topic) is quantitative psychology."},
+  {term:"Sports psychologists", cat:"Subfields", def:"Study the mental and emotional factors that affect athletic performance and participation.",
+   detail:"This subfield applies psychological principles specifically to athletic performance and participation — covering topics like motivation, focus, anxiety management, team dynamics, and even the psychology of recovering from injury or retiring from a sport.",
+   examples:["A sports psychologist teaches a basketball player visualization techniques to mentally rehearse free throws before a big game.","A sports psychologist works with a team to improve communication and trust after a string of on-court conflicts."],
+   scenario:"A psychologist works with an Olympic sprinter on visualization techniques to reduce anxiety before races.", options:["Sports psychologists","Health psychologists","Clinical psychologists","Personality psychology"], answer:0,
+   explain:"Performance anxiety in an athletic context is sports psychology's specific domain."},
+  {term:"Forensic psychologists", cat:"Subfields", def:"Apply psychological principles within the legal and criminal justice system.",
+   detail:"This subfield applies psychology anywhere it intersects with law — criminal cases, civil cases, and correctional settings. Forensic psychologists might evaluate a defendant's mental competency, consult on jury selection, assess risk of reoffending, or provide expert testimony in court. It's frequently confused with criminal profiling on TV, but most real forensic psychology work is assessment and evaluation, not crime-scene analysis.",
+   examples:["A forensic psychologist evaluates whether a defendant understood the consequences of their actions at the time of the crime.","A forensic psychologist consults with a prison system to assess an inmate's risk of reoffending before a parole hearing."],
+   scenario:"A psychologist evaluates a defendant to determine whether they were mentally competent to stand trial.", options:["Forensic psychologists","Clinical psychologists","Community psychologists","Social psychologists"], answer:0,
+   explain:"Anything tied to courts, trials, or the legal system points to forensic psychology."},
+  {term:"Environmental psychologists", cat:"Subfields", def:"Study how physical surroundings (noise, crowding, layout, nature) affect behavior and well-being.",
+   detail:"This subfield studies the two-way relationship between people and their physical surroundings — not just how environments affect behavior and mood, but also how human behavior affects the environment (like sustainability psychology). Common topics include crowding, noise, urban design, access to nature, and how the layout of a building affects both stress and how people move through a space.",
+   examples:["An environmental psychologist studies why hospital patients with a view of trees out their window tend to recover faster than those without one.","An environmental psychologist advises a city on street design that reduces feelings of overcrowding during rush hour."],
+   scenario:"A researcher studies whether office workers report less stress when their workspace has windows with natural light.", options:["Environmental psychologists","Health psychologists","Industrial and organizational psychologists","Engineering psychology"], answer:0,
+   explain:"The physical environment itself (light, space) as the variable of interest signals environmental psychology."},
+
+  // APPROACHES / PARADIGMS
+  {term:"Biological approach", cat:"Approaches", def:"Explains behavior through genetics, brain structures, hormones, and the nervous system.",
+   detail:"This approach assumes that to fully understand any behavior or mental process, you have to look at what's happening physically in the body — brain structures, neurotransmitters, hormones, and genetics. It's a reductionist lens: it tends to explain psychological phenomena by breaking them down into biological causes. This approach is what biological psychologists specialize in, but any psychologist can use it as one possible explanation for a given behavior.",
+   examples:["Explaining why someone startles easily by pointing to an overactive amygdala (the brain's fear-processing center).","Explaining a person's high energy levels and impulsivity partly through elevated dopamine activity in the brain."],
+   scenario:"A psychologist explains a patient's sudden aggression by pointing to damage in their frontal lobe.", options:["Biological approach","Evolutionary approach","Behavioral approach","Psychodynamic approach"], answer:0,
+   explain:"A specific brain structure causing behavior is the biological approach's signature move."},
+  {term:"Evolutionary approach", cat:"Approaches", def:"Explains behavior by asking how it may have helped ancestors survive and reproduce (natural selection).",
+   detail:"This approach explains modern behavior by asking: how might this trait have helped our distant ancestors survive and pass on their genes? It's not about an individual's personal biology (that's the biological approach) — it's about why a behavior exists in the human species at all, tracing it back to natural selection over thousands of generations. A common criticism is that evolutionary explanations can be hard to test directly since we can't observe ancestral environments.",
+   examples:["Explaining why humans across nearly every culture find symmetrical faces attractive, since symmetry may have signaled genetic health to ancestors choosing mates.","Explaining why babies are born with an instinctive grasping reflex, which likely helped ancestral infants cling to a caregiver for survival."],
+   scenario:"A psychologist explains why humans universally fear snakes and spiders by arguing this fear helped ancestors avoid deadly threats.", options:["Evolutionary approach","Biological approach","Sociocultural factors","Humanistic approach"], answer:0,
+   explain:"Explaining a behavior's origin through ancestral survival advantage is evolutionary, not just biological (biological explains the 'how' via body/brain; evolutionary explains the 'why' via ancestry)."},
+  {term:"Psychodynamic approach", cat:"Approaches", def:"Explains behavior through unconscious conflicts, early childhood experiences, and internal drives (rooted in Freud).",
+   detail:"Rooted in Sigmund Freud's original theories, this approach assumes that much of our behavior is driven by unconscious forces we're not even aware of — especially unresolved conflicts and experiences from early childhood. It emphasizes internal drives, defense mechanisms, and the idea that current problems often trace back to something buried from the past. Modern psychodynamic therapy has evolved a lot from Freud's original ideas, but it keeps that core focus on the unconscious.",
+   examples:["Explaining an adult's fear of abandonment as rooted in an unconscious conflict from inconsistent caregiving in early childhood.","Explaining why someone unconsciously self-sabotages a relationship right when things start going well, tracing it to an unresolved early attachment wound."],
+   scenario:"A therapist believes a client's fear of commitment stems from an unresolved unconscious conflict from their relationship with a parent in early childhood.", options:["Psychodynamic approach","Humanistic approach","Cognitive approach","Behavioral approach"], answer:0,
+   explain:"Unconscious conflict + childhood roots = psychodynamic, every time."},
+  {term:"Behavioral approach", cat:"Approaches", def:"Explains behavior purely through learning — conditioning and reinforcement — focusing only on observable actions, not internal thoughts.",
+   detail:"This approach, championed by figures like B.F. Skinner and John Watson, deliberately ignores internal mental states (thoughts, feelings) and focuses only on observable, measurable behavior — and how it's shaped entirely through learning: classical conditioning (associating two stimuli) and operant conditioning (reinforcement and punishment). Its strength is that it's highly testable; its limitation is critics say it oversimplifies complex human experience by ignoring the mind entirely.",
+   examples:["Explaining why a dog salivates at the sound of a bell, because the bell was repeatedly paired with food (classical conditioning).","Explaining why an employee works harder after receiving a bonus for good performance (operant conditioning through positive reinforcement)."],
+   scenario:"A psychologist trains a child to stop nail-biting by rewarding them with a sticker every time they keep their hands away from their mouth.", options:["Behavioral approach","Cognitive approach","Psychodynamic approach","Humanistic approach"], answer:0,
+   explain:"Reinforcement shaping observable behavior, with no discussion of internal thought, is behavioral."},
+  {term:"Cognitive approach", cat:"Approaches", def:"Explains behavior through internal mental processes — how people perceive, interpret, remember, and think.",
+   detail:"This approach explains behavior by looking at internal mental processes — how people take in information, interpret it, store it, and use it to make decisions. Unlike the behavioral approach, it treats the mind as something worth studying directly, even though thoughts aren't directly observable; cognitive psychologists infer mental processes by carefully designing experiments and measuring things like reaction time or accuracy.",
+   examples:["Explaining why someone with social anxiety avoids parties by pointing to their tendency to interpret neutral social cues as threatening.","Explaining why a chess player who mentally rehearses possible moves in advance performs better than one who reacts in the moment."],
+   scenario:"A therapist helps a client with anxiety by identifying and challenging the client's distorted, catastrophic thought patterns.", options:["Cognitive approach","Behavioral approach","Humanistic approach","Psychodynamic approach"], answer:0,
+   explain:"Targeting distorted *thoughts* (not unconscious drives or reinforcement) is the cognitive approach."},
+  {term:"Humanistic approach", cat:"Approaches", def:"Emphasizes free will, personal growth, and each person's innate drive toward self-actualization.",
+   detail:"Developed by Carl Rogers and Abraham Maslow partly as a reaction against both psychodynamic (too focused on dark unconscious conflict) and behavioral (too mechanical, ignoring free will) approaches, humanistic psychology assumes people are fundamentally good and driven toward growth. It emphasizes concepts like self-actualization (reaching your full potential), unconditional positive regard, and free will — the idea that people actively choose their path rather than being purely products of biology or conditioning.",
+   examples:["A therapist using the humanistic approach avoids judging a client's choices and instead helps them explore their own values to find their own answers.","Explaining a person's decision to leave a stable job to pursue art as a pursuit of self-actualization rather than a purely practical or biological drive."],
+   scenario:"A therapist creates a warm, non-judgmental space so a client can freely explore their own potential and reach their fullest self.", options:["Humanistic approach","Psychodynamic approach","Cognitive approach","Sociocultural factors"], answer:0,
+   explain:"Self-actualization and unconditional positive regard are hallmarks of the humanistic approach (Rogers/Maslow)."},
+
+  // KEY CONCEPTS
+  {term:"Neuroscience", cat:"Key Concepts", def:"The scientific study of the nervous system and brain, and their role in behavior and mental processes.",
+   detail:"Neuroscience is a broader, interdisciplinary science — it overlaps with biology, chemistry, and medicine, not just psychology — dedicated to understanding the structure and function of the nervous system at every level, from individual neurons firing to entire brain networks. Psychology draws heavily on neuroscience findings (especially through the biological approach and biological psychologists), but neuroscience itself is its own broader scientific field, not a subfield of psychology.",
+   examples:["A neuroscientist uses an EEG to record the brain's electrical activity while a person sleeps, tracking how it changes across sleep stages.","A neuroscientist studies how neurons in the hippocampus change structurally as new long-term memories are formed."],
+   scenario:"A team maps which neurons fire in the brain when a person recognizes a familiar face.", options:["Neuroscience","Cognitive approach","Quantitative psychologists","Biological approach"], answer:0,
+   explain:"Neuroscience is the broad scientific field studying the nervous system itself — the biological approach is one psychological lens that draws on it."},
+  {term:"Consciousness", cat:"Key Concepts", def:"A person's moment-to-moment awareness of themselves and their environment.",
+   detail:"Consciousness refers to your ongoing awareness of your own thoughts, sensations, and surroundings — but it isn't all-or-nothing; psychologists study different levels and states of it, from full alertness to daydreaming, sleep, dreaming, meditation, or altered states caused by drugs. A central question in this area is how something as physical as brain activity produces something as subjective as felt experience (sometimes called 'the hard problem of consciousness').",
+   examples:["A researcher studies how people's awareness of pain decreases as they enter a deeply relaxed meditative state.","A researcher tracks brain activity across the different stages of sleep to see how consciousness shifts from light sleep into deep, dreamless sleep and REM."],
+   scenario:"A researcher studies how a person's awareness of their surroundings changes as they drift from being fully alert into early stages of sleep.", options:["Consciousness","Cognitive approach","Neuroscience","Developmental psychology"], answer:0,
+   explain:"Awareness itself — its levels and states — is what 'consciousness' refers to."},
+  {term:"Sociocultural factors", cat:"Key Concepts", def:"The influence of social relationships and cultural context (norms, values, expectations) on behavior.",
+   detail:"This term is broader than 'culture' alone — it includes both the social dimension (relationships, roles, group memberships, family dynamics) and the cultural dimension (shared beliefs, values, traditions passed down within a group). Together they shape things psychologists once assumed were purely internal or biological, like how emotions are expressed, what counts as 'normal' behavior, or even how memory and perception work.",
+   examples:["A researcher finds that people from cultures that value emotional restraint report feeling emotions just as strongly as others, but express them less outwardly — a sociocultural difference in display, not internal experience.","A study finds that a person's likelihood of seeking therapy is shaped by both their family's attitude toward mental health (social) and broader cultural stigma around it (cultural)."],
+   scenario:"A researcher notes that a person's willingness to speak up in a meeting is shaped by the norms of their culture and social role.", options:["Sociocultural factors","Culture","Social psychologists","Collectivistic culture"], answer:0,
+   explain:"The general influence of both social AND cultural context together is 'sociocultural factors' — broader than 'culture' alone."},
+  {term:"Culture", cat:"Key Concepts", def:"The shared values, beliefs, behaviors, and symbols passed down within a group and communicated across generations.",
+   detail:"Culture refers to everything a group of people shares and passes down — not just visible things like food, holidays, and language, but also deeper, often invisible things like values, assumptions about the world, and unwritten social rules. Culture is learned, not inherited biologically, which is why children raised in a different culture than their biological parents typically adopt the culture they were raised in.",
+   examples:["A family passes down specific religious holiday traditions and the values behind them from grandparents to grandchildren.","An immigrant community maintains its native language and cuisine in a new country while gradually blending in some customs from the surrounding culture."],
+   scenario:"A family teaches their children specific holiday traditions, food customs, and values that have been passed down for generations.", options:["Culture","Sociocultural factors","Individualistic culture","Collectivistic culture"], answer:0,
+   explain:"Shared, transmitted traditions and values are the definition of culture itself."},
+  {term:"Individualistic culture", cat:"Key Concepts", def:"A culture that values independence, personal achievement, and individual rights over group goals.",
+   detail:"Common in places like the U.S., Canada, and much of Western Europe, individualistic cultures emphasize personal identity, independence, and self-reliance. Success tends to be credited to individual effort and ability rather than to family or group support, and personal goals are often prioritized even when they conflict with group expectations.",
+   examples:["A student picks a college major based purely on personal passion, even though it isn't the career path their family expected.","A company culture praises 'top performer of the month' individually rather than recognizing the whole team collectively."],
+   scenario:"In this society, a promotion at work is celebrated as the result of one employee's personal talent and hard work.", options:["Individualistic culture","Collectivistic culture","Culture","Sociocultural factors"], answer:0,
+   explain:"Crediting the individual's personal achievement (not the team/family) signals an individualistic culture."},
+  {term:"Collectivistic culture", cat:"Key Concepts", def:"A culture that values group harmony, interdependence, and family/community goals over individual desires.",
+   detail:"Common in many parts of Asia, Africa, and Latin America, collectivistic cultures emphasize the needs and harmony of the group — family, community, or society — over individual desires. Identity is often defined more by one's relationships and roles (son, community member) than by standing out as a unique individual, and decisions are frequently made with the group's well-being in mind first.",
+   examples:["An adult child moves back home after college specifically to help care for aging parents, prioritizing family duty over personal independence.","A team at work shares credit for a successful project equally, even though one member did most of the technical work, because standing out individually is discouraged."],
+   scenario:"In this society, a student turns down a prestigious out-of-state university offer to stay close and help support their family.", options:["Collectivistic culture","Individualistic culture","Culture","Sociocultural factors"], answer:0,
+   explain:"Prioritizing family/group needs over personal opportunity signals a collectivistic culture."},
+];
+
+const CATS = ["All", "Subfields", "Approaches", "Key Concepts"];
+let currentCat = "All";
+let mode = "cards";
+
+// ---------- CATEGORY FILTER ----------
+const catsEl = document.getElementById('cats');
+CATS.forEach(c=>{
+  const b=document.createElement('button');
+  b.className='catbtn'+(c==="All"?" active":"");
+  b.textContent=c;
+  b.dataset.cat=c;
+  b.onclick=()=>{
+    currentCat=c;
+    document.querySelectorAll('.catbtn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    if(mode==="cards") initCards();
+    else if(mode==="quiz") initQuiz();
+    else initType();
+  };
+  catsEl.appendChild(b);
+});
+
+function filtered(){
+  return currentCat==="All" ? DATA : DATA.filter(d=>d.cat===currentCat);
+}
+
+// ---------- MODE SWITCH ----------
+document.querySelectorAll('.modebtn').forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll('.modebtn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    mode=b.dataset.mode;
+    document.getElementById('cardsSection').classList.toggle('active', mode==='cards');
+    document.getElementById('quizSection').classList.toggle('active', mode==='quiz');
+    document.getElementById('typeSection').classList.toggle('active', mode==='type');
+    if(mode==='cards') initCards();
+    else if(mode==='quiz') initQuiz();
+    else initType();
+  };
+});
+
+// ---------- FLASHCARDS ----------
+let deck=[], cardIdx=0, seen=new Set();
+function initCards(){
+  deck = filtered();
+  cardIdx=0; seen=new Set();
+  renderCard();
+}
+function renderCard(){
+  const d=deck[cardIdx];
+  const cardEl=document.getElementById('card');
+  cardEl.classList.remove('flipped');
+  document.getElementById('cardTag').textContent = d.cat.toUpperCase();
+  document.getElementById('cardTerm').textContent = d.term;
+  document.getElementById('cardDef').textContent = d.def;
+  document.getElementById('cardDetail').textContent = d.detail || '';
+  const exList=document.getElementById('cardExamples');
+  exList.innerHTML='';
+  (d.examples||[]).forEach(ex=>{
+    const li=document.createElement('li');
+    li.textContent=ex;
+    exList.appendChild(li);
+  });
+  document.getElementById('deckStatus').textContent = `Card ${cardIdx+1} of ${deck.length} — ${currentCat}`;
+  document.getElementById('prevBtn').disabled = cardIdx===0;
+  document.getElementById('nextBtn').disabled = cardIdx===deck.length-1;
+  seen.add(cardIdx);
+  renderDots();
+}
+function renderDots(){
+  const dotsEl=document.getElementById('dots');
+  dotsEl.innerHTML='';
+  deck.forEach((_,i)=>{
+    const s=document.createElement('span');
+    if(i===cardIdx) s.className='current';
+    else if(seen.has(i)) s.className='seen';
+    dotsEl.appendChild(s);
+  });
+}
+document.getElementById('card').onclick=()=>{
+  document.getElementById('card').classList.toggle('flipped');
+};
+document.getElementById('prevBtn').onclick=()=>{ if(cardIdx>0){cardIdx--; renderCard();} };
+document.getElementById('nextBtn').onclick=()=>{ if(cardIdx<deck.length-1){cardIdx++; renderCard();} };
+
+// ---------- QUIZ ----------
+let quizSet=[], qIdx=0, score=0, answered=false;
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+function initQuiz(){
+  quizSet = shuffle(filtered());
+  qIdx=0; score=0; answered=false;
+  renderQuiz();
+}
+function renderQuiz(){
+  const body=document.getElementById('quizBody');
+  document.getElementById('quizCount').textContent = `Question ${qIdx+1} of ${quizSet.length}`;
+  document.getElementById('quizScore').textContent = `Score: ${score}/${qIdx}`;
+  document.getElementById('progFill').style.width = `${(qIdx/quizSet.length)*100}%`;
+
+  if(qIdx>=quizSet.length){
+    body.innerHTML = `<div class="done">
+      <h2>${score} / ${quizSet.length}</h2>
+      <p>${score===quizSet.length ? "Clean sweep. That's exam-ready." : "Nice work — replay to lock in the ones you missed."}</p>
+      <button class="navbtn" onclick="initQuiz()">Try Again</button>
+    </div>`;
+    document.getElementById('progFill').style.width = `100%`;
+    return;
+  }
+
+  const q=quizSet[qIdx];
+  answered=false;
+  body.innerHTML = `
+    <div class="scenario">
+      <div class="label">Scenario</div>
+      <p>${q.scenario}</p>
+    </div>
+    <div class="options" id="optsWrap"></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="quiznav"><button class="navbtn" id="nextQBtn" style="display:none;">Next →</button></div>
+  `;
+  const optsWrap=document.getElementById('optsWrap');
+  q.options.forEach((opt,i)=>{
+    const b=document.createElement('button');
+    b.className='opt';
+    b.textContent=opt;
+    b.onclick=()=>selectAnswer(i);
+    optsWrap.appendChild(b);
+  });
+}
+function selectAnswer(i){
+  if(answered) return;
+  answered=true;
+  const q=quizSet[qIdx];
+  const opts=document.querySelectorAll('.opt');
+  opts.forEach((o,idx)=>{
+    o.disabled=true;
+    if(idx===q.answer) o.classList.add('correct');
+    else if(idx===i) o.classList.add('wrong');
+  });
+  if(i===q.answer) score++;
+  const fb=document.getElementById('feedback');
+  fb.classList.add('show');
+  fb.innerHTML = `<b>${q.term}:</b> ${q.explain}`;
+  document.getElementById('quizScore').textContent = `Score: ${score}/${qIdx+1}`;
+  document.getElementById('nextQBtn').style.display='inline-block';
+  document.getElementById('nextQBtn').onclick=()=>{ qIdx++; renderQuiz(); };
+}
+
+// ---------- TYPE THE TERM (with spelling grace) ----------
+let typeSet=[], tIdx=0, tScore=0, tAnswered=false;
+
+function levenshtein(a,b){
+  const m=a.length, n=b.length;
+  const dp=Array.from({length:m+1},()=>new Array(n+1).fill(0));
+  for(let i=0;i<=m;i++) dp[i][0]=i;
+  for(let j=0;j<=n;j++) dp[0][j]=j;
+  for(let i=1;i<=m;i++){
+    for(let j=1;j<=n;j++){
+      if(a[i-1]===b[j-1]) dp[i][j]=dp[i-1][j-1];
+      else dp[i][j]=1+Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+    }
+  }
+  return dp[m][n];
+}
+function normalize(s){
+  return s.toLowerCase().trim().replace(/\s+/g,' ').replace(/[.,'"!?]/g,'');
+}
+// returns "exact" | "close" | "miss"
+function gradeAnswer(input, target){
+  const a=normalize(input), b=normalize(target);
+  if(!a) return "miss";
+  if(a===b) return "exact";
+  const dist=levenshtein(a,b);
+  const grace=Math.max(2, Math.round(b.length*0.22)); // spelling grace scales with term length
+  return dist<=grace ? "close" : "miss";
+}
+
+function initType(){
+  typeSet = shuffle(filtered());
+  tIdx=0; tScore=0; tAnswered=false;
+  renderType();
+}
+function renderType(){
+  const body=document.getElementById('typeBody');
+  document.getElementById('typeCount').textContent = `Question ${Math.min(tIdx+1,typeSet.length)} of ${typeSet.length}`;
+  document.getElementById('typeScore').textContent = `Score: ${tScore}/${tIdx}`;
+  document.getElementById('typeProgFill').style.width = `${(tIdx/typeSet.length)*100}%`;
+
+  if(tIdx>=typeSet.length){
+    body.innerHTML = `<div class="done">
+      <h2>${tScore} / ${typeSet.length}</h2>
+      <p>${tScore===typeSet.length ? "Every term, spelled well enough to count. That's the goal." : "Replay to nail the ones that slipped."}</p>
+      <button class="navbtn" onclick="initType()">Try Again</button>
+    </div>`;
+    document.getElementById('typeProgFill').style.width = `100%`;
+    return;
+  }
+
+  const q=typeSet[tIdx];
+  tAnswered=false;
+  body.innerHTML = `
+    <div class="prompt-card">
+      <div class="label">Definition</div>
+      <p>${q.def}</p>
+    </div>
+    <div class="type-form">
+      <input type="text" class="type-input" id="typeInput" placeholder="Type the term..." autocomplete="off" spellcheck="false">
+      <button class="checkbtn" id="checkBtn">Check</button>
+    </div>
+    <div class="type-feedback" id="typeFeedback"></div>
+    <div class="quiznav"><button class="navbtn" id="nextTBtn" style="display:none;">Next →</button></div>
+  `;
+  const input=document.getElementById('typeInput');
+  input.focus();
+  const check=()=>{
+    if(tAnswered) return;
+    submitType(input.value);
+  };
+  document.getElementById('checkBtn').onclick=check;
+  input.onkeydown=(e)=>{ if(e.key==='Enter') check(); };
+}
+function submitType(value){
+  tAnswered=true;
+  const q=typeSet[tIdx];
+  const verdict=gradeAnswer(value, q.term);
+  const input=document.getElementById('typeInput');
+  input.disabled=true;
+  document.getElementById('checkBtn').disabled=true;
+  const fb=document.getElementById('typeFeedback');
+  fb.classList.add('show');
+
+  if(verdict==="exact"){
+    input.classList.add('correct');
+    tScore++;
+    fb.innerHTML = `<span class="verdict right">✓ Exact.</span> <b>${q.term}</b> — ${q.explain}`;
+  } else if(verdict==="close"){
+    input.classList.add('correct');
+    tScore++;
+    fb.innerHTML = `<span class="verdict close">✓ Close enough (spelling grace applied).</span> Correct term: <b>${q.term}</b> — ${q.explain}`;
+  } else {
+    input.classList.add('wrong');
+    fb.innerHTML = `<span class="verdict miss">✗ Not quite.</span> Correct term: <b>${q.term}</b> — ${q.explain}`;
+  }
+  document.getElementById('typeScore').textContent = `Score: ${tScore}/${tIdx+1}`;
+  document.getElementById('nextTBtn').style.display='inline-block';
+  document.getElementById('nextTBtn').onclick=()=>{ tIdx++; renderType(); };
+}
+
+// init
+initCards();
+</script>
+</body>
+</html>
