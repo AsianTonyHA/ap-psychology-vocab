@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sensation &amp; Perception Study Guide</title>
+  <meta name="description" content="Interactive study guide, 105-question practice test, quiz mode, and cheat sheet for the Sensation & Perception unit.">
+  <style>
+:root {
+  --bg: #f6f5f1;
+  --surface: #ffffff;
+  --surface-2: #efede6;
+  --text: #1d1f24;
+  --muted: #5f6470;
+  --border: #dcd9cf;
+  --accent: #3a5bd9;
+  --accent-soft: #e4e9fb;
+  --good: #1f8a4c;
+  --good-soft: #e1f3e8;
+  --bad: #c2382f;
+  --bad-soft: #fbe5e3;
+  --warn: #b7791f;
+  --code-bg: #f1efe8;
+  --radius: 12px;
+  --shadow: 0 1px 2px rgba(0,0,0,.05), 0 4px 14px rgba(0,0,0,.04);
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14161b; --surface: #1c1f26; --surface-2: #252932; --text: #e8e9ec; --muted: #a0a6b3;
+    --border: #2f343e; --accent: #7b96ff; --accent-soft: #252e4d; --good: #4fc27f; --good-soft: #17301f;
+    --bad: #ff7a70; --bad-soft: #3a1d1b; --warn: #e0a54b; --code-bg: #20232b;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14161b; --surface: #1c1f26; --surface-2: #252932; --text: #e8e9ec; --muted: #a0a6b3;
+  --border: #2f343e; --accent: #7b96ff; --accent-soft: #252e4d; --good: #4fc27f; --good-soft: #17301f;
+  --bad: #ff7a70; --bad-soft: #3a1d1b; --warn: #e0a54b; --code-bg: #20232b;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: var(--font); font-size: 16px; line-height: 1.55;
+}
+main { max-width: 1040px; margin: 0 auto; padding: 16px; }
+h1, h2, h3 { line-height: 1.25; margin: 0 0 .4em; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.05rem; }
+p { margin: 0 0 .6em; }
+u { text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; font-weight: 600; }
+.hidden { display: none !important; }
+.muted { color: var(--muted); }
+.small { font-size: .85rem; }
+
+/* Top bar */
+.topbar { position: sticky; top: 0; z-index: 20; background: var(--surface); border-bottom: 1px solid var(--border); }
+.topbar-inner { max-width: 1040px; margin: 0 auto; padding: 12px 16px 6px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 10px; background: var(--accent); color: #fff; font-weight: 800; font-size: .85rem; letter-spacing: .5px; flex-shrink: 0; }
+.brand h1 { font-size: 1.15rem; margin: 0; }
+.sub { margin: 0; color: var(--muted); font-size: .82rem; }
+.icon-btn { border: 1px solid var(--border); background: var(--surface-2); color: var(--text); border-radius: 999px; width: 38px; height: 38px; font-size: 1.1rem; cursor: pointer; }
+.tabs { max-width: 1040px; margin: 0 auto; display: flex; gap: 4px; padding: 0 12px; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { flex-shrink: 0; border: 0; background: none; color: var(--muted); padding: 10px 12px; font: inherit; font-weight: 600; font-size: .95rem; border-bottom: 3px solid transparent; cursor: pointer; }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.badge { display: inline-block; min-width: 20px; padding: 0 6px; border-radius: 999px; background: var(--bad); color: #fff; font-size: .72rem; line-height: 20px; text-align: center; margin-left: 4px; }
+
+.view { display: none; }
+.view.active { display: block; }
+
+/* Panels & controls */
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); margin-bottom: 14px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.toolbar { background: var(--bg); padding: 8px 0 10px; display: grid; gap: 10px; }
+.sticky { position: sticky; top: var(--top, 106px); z-index: 10; }
+input[type="search"], select {
+  width: 100%; font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 12px;
+}
+.row input[type="search"] { flex: 1; min-width: 180px; width: auto; }
+.row select { width: auto; }
+.chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex-shrink: 0; border: 1px solid var(--border); background: var(--surface); color: var(--text); padding: 6px 12px; border-radius: 999px; font: inherit; font-size: .88rem; cursor: pointer; }
+.chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.switch { display: inline-flex; align-items: center; gap: 8px; font-size: .92rem; cursor: pointer; user-select: none; }
+.switch input { width: 18px; height: 18px; accent-color: var(--accent); }
+
+.btn { font: inherit; font-weight: 600; border: 1px solid var(--border); background: var(--surface); color: var(--text); padding: 10px 16px; border-radius: 10px; cursor: pointer; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.ghost { background: transparent; }
+.btn.small { padding: 6px 10px; font-size: .85rem; }
+.btn:hover { filter: brightness(1.05); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 32px; }
+
+/* Study guide */
+.group-head { margin: 22px 0 10px; display: flex; align-items: baseline; gap: 10px; }
+.group-head h2 { margin: 0; }
+.group-intro { background: var(--accent-soft); border-radius: 10px; padding: 10px 12px; font-size: .92rem; margin-bottom: 12px; }
+.term { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px; box-shadow: var(--shadow); }
+.term-head { display: flex; gap: 10px; align-items: baseline; }
+.term-num { flex-shrink: 0; font-weight: 800; color: var(--accent); font-size: .9rem; min-width: 2.2em; }
+.term-name { font-weight: 700; font-size: 1.05rem; }
+.term-body { margin-top: 8px; }
+.term-body ul { margin: 6px 0 8px; padding-left: 20px; }
+.field { margin: 6px 0; font-size: .95rem; }
+.field b.lbl { color: var(--muted); font-weight: 700; font-size: .78rem; text-transform: uppercase; letter-spacing: .4px; margin-right: 6px; }
+.clues { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.clue { background: var(--surface-2); border-radius: 6px; padding: 2px 8px; font-size: .82rem; }
+.flash .term { cursor: pointer; }
+.flash .term:not(.revealed) .term-body { display: none; }
+.flash .term:not(.revealed) .term-head::after { content: "tap to reveal"; margin-left: auto; color: var(--muted); font-size: .78rem; }
+.diagram { margin: 10px 0; }
+.diagram h4 { margin: 0 0 2px; font-size: .95rem; }
+pre.art { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-family: var(--mono); font-size: .8rem; line-height: 1.35; overflow-x: auto; margin: 6px 0; }
+.confused { margin: 8px 0 18px; }
+.confused h3 { margin: 14px 0 8px; }
+.empty { text-align: center; color: var(--muted); padding: 30px 0; }
+mark { background: #ffe58a; color: inherit; border-radius: 3px; padding: 0 1px; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: var(--surface-2); font-weight: 700; }
+tr:last-child td { border-bottom: 0; }
+table.mini { width: auto; margin: 8px 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+table.cheat td:nth-child(2) { font-weight: 700; color: var(--accent); }
+table.cheat td:nth-child(3) { color: var(--muted); }
+.numbers { margin-top: 14px; }
+
+/* Questions */
+.section-title { margin: 22px 0 10px; font-size: 1.1rem; }
+.q { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 12px; box-shadow: var(--shadow); }
+.q-top { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+.q-num { font-weight: 800; color: var(--accent); }
+.q-type { font-size: .72rem; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); background: var(--surface-2); border-radius: 6px; padding: 2px 8px; align-self: flex-start; }
+.q-stem { margin-bottom: 8px; }
+.q-items { margin: 4px 0 10px; padding-left: 24px; }
+.choices { display: grid; gap: 6px; }
+.choice { display: flex; gap: 10px; align-items: flex-start; border: 1px solid var(--border); border-radius: 10px; padding: 9px 12px; cursor: pointer; background: var(--surface); transition: background .12s, border-color .12s; }
+.choice:hover { border-color: var(--accent); }
+.choice input { margin-top: 4px; accent-color: var(--accent); flex-shrink: 0; }
+.choice .letter { font-weight: 700; flex-shrink: 0; }
+.choice.selected { border-color: var(--accent); background: var(--accent-soft); }
+.choice.correct { border-color: var(--good); background: var(--good-soft); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.q.locked .choice { cursor: default; }
+.feedback { margin-top: 10px; border-radius: 10px; padding: 10px 12px; font-size: .92rem; }
+.feedback.good { background: var(--good-soft); }
+.feedback.bad { background: var(--bad-soft); }
+.feedback .tags { margin-top: 4px; color: var(--muted); font-size: .82rem; }
+
+.progress-wrap { display: flex; align-items: center; gap: 12px; background: var(--bg); padding: 8px 0; font-size: .88rem; color: var(--muted); }
+.progress { flex: 1; height: 10px; background: var(--surface-2); border-radius: 999px; overflow: hidden; border: 1px solid var(--border); }
+.bar { height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+.score { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+.score .big { font-size: 2rem; font-weight: 800; }
+.score .good-txt { color: var(--good); }
+.score .bad-txt { color: var(--bad); }
+
+/* Quiz */
+.quiz-layout { display: grid; grid-template-columns: 1fr 300px; gap: 16px; align-items: start; }
+.side { position: sticky; top: calc(var(--top, 106px) + 8px); }
+.miss-list, .history { list-style: none; padding: 0; margin: 0 0 14px; font-size: .9rem; }
+.miss-list li, .history li { display: flex; justify-content: space-between; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--border); }
+.miss-list .count { background: var(--bad-soft); color: var(--bad); border-radius: 999px; padding: 0 8px; font-weight: 700; font-size: .8rem; }
+.miss-list .empty-li, .history .empty-li { color: var(--muted); border: 0; }
+
+.foot { text-align: center; color: var(--muted); font-size: .82rem; padding: 10px 16px 30px; }
+
+@media (max-width: 820px) {
+  .quiz-layout { grid-template-columns: 1fr; }
+  .side { position: static; }
+}
+@media (max-width: 560px) {
+  main { padding: 12px; }
+  .sub { display: none; }
+  .term, .q, .panel { padding: 12px; }
+  .tab { padding: 10px 9px; font-size: .9rem; }
+}
+@media (max-width: 420px) {
+  .tabs { gap: 0; padding: 0 6px; }
+  .tab { padding: 10px 6px; font-size: .82rem; }
+}
+@media print {
+  .topbar, .toolbar, .actions, .foot, .progress-wrap, .row { display: none !important; }
+  body { background: #fff; color: #000; }
+  .view { display: none !important; }
+  .view.active { display: block !important; }
+  .panel, .table-wrap, .term, .q { box-shadow: none; }
+}
+
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">S&amp;P</span>
+        <div>
+          <h1>Sensation &amp; Perception</h1>
+          <p class="sub">66 terms &middot; 105-question test &middot; quiz mode</p>
+        </div>
+      </div>
+      <button id="themeToggle" class="icon-btn" aria-label="Toggle dark mode" title="Toggle dark mode">&#9680;</button>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-view="guide" role="tab">Study Guide</button>
+      <button class="tab" data-view="test" role="tab">Practice Test</button>
+      <button class="tab" data-view="quiz" role="tab">Quiz Mode <span id="missBadge" class="badge hidden">0</span></button>
+      <button class="tab" data-view="cheat" role="tab">Cheat Sheet</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- STUDY GUIDE -->
+    <section id="view-guide" class="view active">
+      <div class="toolbar sticky">
+        <input id="termSearch" type="search" placeholder="Search terms, definitions, clue words..." autocomplete="off">
+        <div id="groupChips" class="chips"></div>
+        <label class="switch"><input type="checkbox" id="flashMode"> <span>Flashcard mode (tap a card to reveal)</span></label>
+      </div>
+      <div id="guideContent"></div>
+    </section>
+
+    <!-- PRACTICE TEST -->
+    <section id="view-test" class="view">
+      <div class="panel intro">
+        <h2>Practice Test</h2>
+        <p><b>Directions:</b> Select the BEST answer. 105 questions, easy to hard, mixed review at the end.</p>
+        <div class="row">
+          <label class="switch"><input type="checkbox" id="instantCheck"> <span>Check each answer as I go</span></label>
+          <select id="sectionFilter" aria-label="Filter by section">
+            <option value="all">All sections</option>
+            <option value="1">Section 1: Warm-up (1-35)</option>
+            <option value="2">Section 2: Core (36-70)</option>
+            <option value="3">Section 3: Harder (71-95)</option>
+            <option value="4">Section 4: Mixed (96-105)</option>
+          </select>
+        </div>
+      </div>
+      <div class="progress-wrap sticky">
+        <div class="progress"><div id="testBar" class="bar"></div></div>
+        <span id="testProgressText">0 / 105 answered</span>
+      </div>
+      <div id="testScore" class="panel score hidden"></div>
+      <div id="testContent"></div>
+      <div class="actions">
+        <button id="submitTest" class="btn primary">Submit &amp; grade</button>
+        <button id="onlyMissed" class="btn hidden">Show only missed</button>
+        <button id="resetTest" class="btn ghost">Reset test</button>
+      </div>
+    </section>
+
+    <!-- QUIZ MODE -->
+    <section id="view-quiz" class="view">
+      <div class="quiz-layout">
+        <div>
+          <div class="panel intro">
+            <h2>Quiz Mode</h2>
+            <p>10 questions per round. After you grade, misses are explained and added to your weak-term list. The next round focuses on those terms.</p>
+            <div id="roundInfo" class="muted"></div>
+          </div>
+          <div id="quizScore" class="panel score hidden"></div>
+          <div id="quizContent"></div>
+          <div class="actions">
+            <button id="gradeQuiz" class="btn primary hidden">Grade this round</button>
+            <button id="nextRound" class="btn primary">Start round</button>
+          </div>
+        </div>
+        <aside class="panel side">
+          <h3>Running miss list</h3>
+          <p class="muted small">Terms you have missed, most-missed first.</p>
+          <ul id="missList" class="miss-list"></ul>
+          <h3>Round history</h3>
+          <ul id="roundHistory" class="history"></ul>
+          <button id="clearProgress" class="btn ghost small">Clear miss list &amp; history</button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CHEAT SHEET -->
+    <section id="view-cheat" class="view">
+      <div class="panel intro">
+        <h2>Last-Minute Cheat Sheet</h2>
+        <p id="cheatNote"></p>
+        <div class="row">
+          <input id="cheatSearch" type="search" placeholder="Filter clue words..." autocomplete="off">
+          <button class="btn" onclick="window.print()">Print</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="cheat">
+          <thead><tr><th>If the scenario says...</th><th>The answer is...</th><th>Not...</th></tr></thead>
+          <tbody id="cheatBody"></tbody>
+        </table>
+      </div>
+      <p class="panel numbers"><b>Numbers to know:</b> <span id="numbersNote"></span></p>
+    </section>
+  </main>
+
+  <footer class="foot">Built for studying. Progress is saved in this browser only.</footer>
+  <script>
+// Sensation & Perception study guide data: terms, commonly confused tables, cheat sheet.
+
+const GROUPS = [
+  { id: "basics", name: "Basics", range: "1-9",
+    intro: "" },
+  { id: "vision", name: "Vision", range: "10-31",
+    intro: "Light path: cornea &rarr; pupil &rarr; lens &rarr; retina (rods and cones &rarr; bipolar cells &rarr; ganglion cells) &rarr; optic nerve &rarr; thalamus &rarr; occipital lobe." },
+  { id: "hearing", name: "Hearing", range: "32-38",
+    intro: "Sound path: outer ear &rarr; eardrum &rarr; middle ear bones (hammer, anvil, stirrup) &rarr; oval window &rarr; cochlea (fluid, basilar membrane, hair cells) &rarr; auditory nerve &rarr; thalamus &rarr; temporal lobe." },
+  { id: "smell", name: "Smell & Taste", range: "39-44", intro: "" },
+  { id: "touch", name: "Touch & Body Senses", range: "45-50", intro: "" },
+  { id: "perception", name: "Perception", range: "51-66", intro: "" }
+];
+
+const TERMS = [
+  // ---------- BASICS ----------
+  { n: "1", g: "basics", name: "Sensation",
+    def: `<u>Sensation</u> is the process by which sensory receptors and the nervous system receive raw energy from the environment. It is detection only, with no interpretation yet.`,
+    ex: `Light waves from a stop sign hit your eyes before you know what the sign says.`,
+    trick: `Sensation = Senses take it IN.`,
+    clues: `detect, receive, raw energy, receptors pick up` },
+  { n: "2", g: "basics", name: "Perception",
+    def: `<u>Perception</u> is the process by which the brain organizes and interprets sensory information so it has meaning.`,
+    ex: `Recognizing the red octagon as a stop sign and knowing you should brake.`,
+    trick: `Perception = Processing and Putting meaning on it.`,
+    clues: `interpret, recognize, make sense of, organize, identify` },
+  { n: "3", g: "basics", name: "Transduction",
+    def: `<u>Transduction</u> is the conversion of one form of energy (light, sound waves, chemicals, pressure) into neural impulses the brain can read.`,
+    ex: `Hair cells in the cochlea turn sound vibrations into electrical signals.`,
+    trick: `TRANSduction = TRANSlation into the brain's language.`,
+    clues: `convert, change energy into neural signals, electrical impulses` },
+  { n: "4", g: "basics", name: "Absolute threshold",
+    def: `The <u>absolute threshold</u> is the minimum amount of stimulation a person needs to detect a stimulus 50 percent of the time.`,
+    ex: `A hearing test that finds the quietest beep Maya can hear half the time.`,
+    trick: `ABSOLUTE = from ZERO to barely there. Think "50% detection."`,
+    clues: `faintest, quietest, weakest, minimum, detect at all, 50 percent` },
+  { n: "5", g: "basics", name: "Just-noticeable difference",
+    def: `The <u>just-noticeable difference</u> (JND) is the smallest change between two stimuli that a person can detect 50 percent of the time. It is also called the difference threshold.`,
+    ex: `The smallest amount of extra sugar that makes your tea taste sweeter.`,
+    trick: `Absolute threshold = something vs nothing. JND = something vs slightly more.`,
+    clues: `notice a change, tell the difference, smallest increase, compare two` },
+  { n: "6", g: "basics", name: "Weber's Law",
+    def: `<u>Weber's Law</u> states that to be perceived as different, two stimuli must differ by a constant proportion (percentage), not a constant amount.`,
+    ex: `Adding 1 pound to a 10-pound backpack is noticeable, but adding 1 pound to a 100-pound bag is not.`,
+    trick: `Weber = perCENTage. Bigger starting stimulus, bigger change needed.`,
+    clues: `proportion, percentage, ratio, depends on the starting amount` },
+  { n: "7", g: "basics", name: "Sensory adaptation",
+    def: `<u>Sensory adaptation</u> is diminished sensitivity to an unchanging stimulus over time. The receptors fire less often.`,
+    ex: `You stop noticing the smell of your own house or the feel of your socks.`,
+    trick: `ADAPTation = your senses ADAPT and tune it OUT.`,
+    clues: `after a while, no longer notices, constant, unchanging, gets used to` },
+  { n: "8", g: "basics", name: "Sensory interaction",
+    def: `<u>Sensory interaction</u> is the principle that one sense can influence another.`,
+    ex: `Food tastes bland when you have a stuffy nose because smell affects taste.`,
+    trick: `Senses INTERACT = teamwork (they affect each other).`,
+    clues: `one sense affects another, stuffy nose, food tastes different, seeing lips changes what you hear` },
+  { n: "9", g: "basics", name: "Synesthesia",
+    def: `<u>Synesthesia</u> is a condition in which stimulation of one sense automatically triggers an experience in another sense.`,
+    ex: `Priya sees the color purple every time she hears a trumpet.`,
+    trick: `SYN = together. Senses cross wires (hear colors, taste words).`,
+    clues: `sees colors when hearing music, tastes words, numbers have colors, cross-sensory experience` },
+
+  // ---------- VISION ----------
+  { n: "10", g: "vision", name: "Retina",
+    def: `The <u>retina</u> is the light-sensitive inner surface at the back of the eye that contains the rods and cones. It is where transduction of light happens.`,
+    ex: `Damage to Leo's retina from diabetes causes blurry patches in his vision.`,
+    trick: `Retina = the eye's movie screen at the back.`,
+    clues: `back of the eye, contains rods and cones, light-sensitive layer` },
+  { n: "11", g: "vision", name: "Blind spot",
+    def: `The <u>blind spot</u> is the point where the optic nerve leaves the eye. It has no rods or cones, so no vision happens there.`,
+    ex: `Close one eye, stare at a dot, and a second dot to the side disappears at a certain distance.`,
+    trick: `No receptors = no seeing. The optic nerve's exit door is blind.`,
+    clues: `optic nerve leaves, no receptors, dot disappears` },
+  { n: "12", g: "vision", name: "Closure and the blind spot",
+    def: `The brain uses <u>closure</u> to fill in the missing part of the image at the blind spot, so we do not notice a hole in our vision.`,
+    ex: `You never see a black hole in your view, even with one eye closed, because the brain fills it in with the surrounding pattern.`,
+    trick: `Closure = the brain "closes" the gap.`,
+    clues: `fills in, completes, never notice the gap` },
+  { n: "13", g: "vision", name: "Lens",
+    def: `The <u>lens</u> is the transparent structure behind the pupil that changes shape to focus images on the retina.`,
+    ex: `A cataract clouds the lens and makes everything look foggy.`,
+    trick: `Lens = camera lens that focuses.`,
+    clues: `focuses light, behind the pupil, changes shape` },
+  { n: "14", g: "vision", name: "Accommodation",
+    def: `<u>Accommodation</u> is the process by which the lens changes its curvature to focus near or far objects on the retina.`,
+    ex: `Your lens thickens when you look from the whiteboard down to your notes.`,
+    trick: `The lens ACCOMMODATES (adjusts) for distance.`,
+    clues: `lens changes shape, thickens, flattens, refocuses near to far` },
+  { n: "15", g: "vision", name: "Nearsightedness and farsightedness",
+    def: `<u>Nearsightedness</u> (myopia) means near objects are clear but distant ones are blurry, because the image focuses in front of the retina. <u>Farsightedness</u> (hyperopia) means distant objects are clear but near ones are blurry, because the image focuses behind the retina.`,
+    ex: `Sam cannot read the board from the back row (nearsighted). Grandpa holds the menu at arm's length (farsighted).`,
+    trick: `The name tells you what you CAN see. NEARsighted sees NEAR.`,
+    clues: `can't see the board, can't read up close, focuses in front of / behind the retina` },
+  { n: "16", g: "vision", name: "Rods",
+    def: `<u>Rods</u> are retinal receptors that detect black, white, and gray. They work in dim light and handle peripheral vision.`,
+    ex: `At night you can see shapes on a dark trail but not their colors.`,
+    trick: `Rods = Really dim light. About 120 million, mostly on the edges.`,
+    clues: `night, dim light, peripheral, black and white, gray, motion at the edge` },
+  { n: "17", g: "vision", name: "Cones",
+    def: `<u>Cones</u> are retinal receptors concentrated near the fovea that detect color and fine detail in bright light.`,
+    ex: `Reading small print and telling a red shirt from an orange one in daylight.`,
+    trick: `Cones = Color and Clarity. About 6 million, packed in the center.`,
+    clues: `color, fine detail, bright light, center of vision, sharp` },
+  { n: "18-20", g: "vision", name: "Blue = short, green = medium, red = long wavelengths",
+    def: `Visible light runs from <u>short wavelengths (blue/violet)</u> to <u>medium (green)</u> to <u>long (red)</u>. Each cone type is most sensitive to one range.`,
+    ex: `A stoplight's red light has longer wavelengths than its green light.`,
+    trick: `ROYGBIV reads from long to short. Red = Really long. Blue = Brief.`,
+    clues: `wavelength, hue, short/medium/long` },
+  { n: "21", g: "vision", name: "Trichromatic theory",
+    def: `The <u>trichromatic theory</u> (Young-Helmholtz) states that the retina has three types of cones, most sensitive to red, green, or blue, and all colors come from combining their signals.`,
+    ex: `A TV screen makes every color from tiny red, green, and blue pixels.`,
+    trick: `TRI = three cones. Explains the RECEPTOR (retina) level.`,
+    clues: `three types of cones, red, green, blue, combine` },
+  { n: "22", g: "vision", name: "Opponent-process theory",
+    def: `The <u>opponent-process theory</u> states that color is processed in opposing pairs (red-green, blue-yellow, black-white). When one member of a pair is stimulated, the other is inhibited.`,
+    ex: `Staring at a green flag, then at a white wall, produces a red afterimage.`,
+    trick: `OPPONENTS fight in pairs. Explains AFTERIMAGES and the level after the retina (ganglion cells, thalamus).`,
+    clues: `afterimage, opposing pairs, stare then look away, red-green, blue-yellow` },
+  { n: "23", g: "vision", name: "Fovea",
+    def: `The <u>fovea</u> is the central focal point of the retina, where cones are packed most tightly. It gives the sharpest vision.`,
+    ex: `You move your eyes so the word you are reading lands on your fovea.`,
+    trick: `Fovea = Focus. Center, cones, clearest.`,
+    clues: `center of the retina, sharpest, most cones, looking directly at` },
+  { n: "24", g: "vision", name: "Afterimages",
+    def: `An <u>afterimage</u> is an image that stays after the stimulus is removed, usually in the opposite color: red/green, blue/yellow, black/white.`,
+    ex: `After staring at a yellow square, Jada sees a blue square on a white page.`,
+    trick: `Afterimage = evidence for opponent-process. Opposite color shows up.`,
+    clues: `stares, then looks at a white wall, sees the opposite color` },
+  { n: "25", g: "vision", name: "Ganglion cells",
+    def: `<u>Ganglion cells</u> are retinal neurons whose axons bundle together to form the optic nerve. They receive signals from rods and cones through bipolar cells.`,
+    ex: `Glaucoma damages ganglion cells, which harms the optic nerve.`,
+    trick: `Ganglion axons = the Gang that forms the optic nerve.`,
+    clues: `axons form the optic nerve, receive from bipolar cells` },
+  { n: "26", g: "vision", name: "Color vision deficiencies",
+    def: `<u>Color vision deficiencies</u> are conditions in which one or more cone types are missing or do not work normally, so some colors are hard to tell apart. They are more common in males because the genes are on the X chromosome.`,
+    ex: `Marcus cannot tell red from green on a traffic chart.`,
+    trick: `"Color blind" usually means color CONFUSED, not seeing gray.`,
+    clues: `trouble telling colors apart, more common in males` },
+  { n: "27", g: "vision", name: "Dichromatism",
+    def: `<u>Dichromatism</u> is a color deficiency in which a person has only two working types of cones. The most common form is red-green deficiency.`,
+    ex: `Tyler sees the world in blues and yellows and confuses red with green.`,
+    trick: `DI = two cones.`,
+    clues: `two cone types, red-green color blindness` },
+  { n: "28", g: "vision", name: "Monochromatism",
+    def: `<u>Monochromatism</u> is a rare condition in which a person has one or no working cone types, so the world appears in shades of gray.`,
+    ex: `Ana sees everything like a black-and-white movie.`,
+    trick: `MONO = one (or none). No color at all.`,
+    clues: `only shades of gray, no color at all, total color blindness` },
+  { n: "29", g: "vision", name: "Occipital lobes",
+    def: `The <u>occipital lobes</u> are at the back of the brain and contain the primary visual cortex, which receives and processes visual information.`,
+    ex: `A blow to the back of Dev's head causes him to see flashes of light.`,
+    trick: `OCcipital = OCular (eyes) at the back.`,
+    clues: `back of the brain, visual cortex, sees flashes after a hit to the back of the head` },
+  { n: "30", g: "vision", name: "Prosopagnosia",
+    def: `<u>Prosopagnosia</u> is face blindness: the inability to recognize familiar faces even though vision is otherwise normal. It is linked to damage to the fusiform face area in the temporal lobe.`,
+    ex: `Ellen recognizes her husband only by his voice and his walk, not his face.`,
+    trick: `PROSOP = face, AGNOSIA = not knowing.`,
+    clues: `can't recognize faces, recognizes people by voice, eyes work fine` },
+  { n: "31", g: "vision", name: "Blindsight",
+    def: `<u>Blindsight</u> is a condition in which a person with damage to the visual cortex responds to visual stimuli they report they cannot consciously see.`,
+    ex: `A patient says he is blind on one side, yet he walks around a chair placed there.`,
+    trick: `BLINDsight = blind to awareness, but the SIGHT still guides action.`,
+    clues: `says he can't see it but points to it, avoids obstacles without awareness, unconscious visual processing` },
+
+  // ---------- HEARING ----------
+  { n: "32", g: "hearing", name: "Wavelength (frequency) = pitch",
+    def: `The <u>wavelength</u> of a sound wave determines its <u>pitch</u>. Short wavelengths (high frequency) sound high-pitched, and long wavelengths (low frequency) sound low-pitched.`,
+    ex: `A whistle has short, fast waves (high pitch). A tuba has long, slow waves (low pitch).`,
+    trick: `Short and squeaky, long and low.`,
+    clues: `high or low note, frequency, hertz (Hz), deep voice, squeaky` },
+  { n: "33", g: "hearing", name: "Amplitude = loudness",
+    def: `The <u>amplitude</u> (height) of a sound wave determines its <u>loudness</u>, measured in decibels (dB).`,
+    ex: `Turning up the volume makes taller sound waves but does not change the note.`,
+    trick: `Amplitude = Amplify.`,
+    clues: `loud, soft, volume, decibels, wave height` },
+  { n: "34", g: "hearing", name: "Place theory",
+    def: `<u>Place theory</u> states that we hear different pitches because different sound waves stimulate hair cells at different places along the cochlea's basilar membrane. It best explains <b>high</b> pitches.`,
+    ex: `A soprano's high note vibrates the basilar membrane near its base.`,
+    trick: `PLACE = location on the membrane. Think "high places": high pitches are coded by place.`,
+    clues: `location on the basilar membrane, specific spot, high-pitched sounds` },
+  { n: "35", g: "hearing", name: "Frequency theory (volley principle)",
+    def: `<u>Frequency theory</u> states that the rate of nerve impulses up the auditory nerve matches the frequency of the tone, which lets us sense pitch. It best explains <b>low</b> pitches. The <u>volley principle</u> adds that groups of neurons take turns firing so they can signal frequencies faster than one neuron can fire.`,
+    ex: `A 100 Hz bass note makes auditory neurons fire about 100 times per second.`,
+    trick: `Frequency = Firing rate. Volley = neurons Volleying like a team, taking turns.`,
+    clues: `rate of firing, matches the frequency, low-pitched, neurons take turns (volley)` },
+  { n: "36", g: "hearing", name: "Sound localization",
+    def: `<u>Sound localization</u> is the ability to tell where a sound comes from by comparing how loud it is and when it arrives at each ear.`,
+    ex: `A car honks on Omar's left, so the sound reaches his left ear a split second sooner and a bit louder.`,
+    trick: `Two ears = two data points. Louder and sooner side wins.`,
+    clues: `which direction, reaches one ear first, louder in one ear, tilts head` },
+  { n: "37", g: "hearing", name: "Conduction deafness",
+    def: `<u>Conduction deafness</u> is hearing loss caused by damage to the mechanical system that carries sound waves to the cochlea, such as the eardrum or the middle ear bones. Hearing aids often help.`,
+    ex: `A punctured eardrum from a diving accident muffles Lily's hearing.`,
+    trick: `CONDUCTion = the sound can't be CONDUCTED (carried) in. Mechanical problem.`,
+    clues: `eardrum, middle ear bones, punctured, ear infection fluid, hearing aid helps` },
+  { n: "38", g: "hearing", name: "Sensorineural deafness",
+    def: `<u>Sensorineural deafness</u> is hearing loss caused by damage to the cochlea's hair cells or the auditory nerve. It is the most common type and is usually permanent. Cochlear implants can help.`,
+    ex: `After years of loud concerts without earplugs, Zeke can no longer hear high tones.`,
+    trick: `SENSORI-NEURAL = the Sensor (hair cells) or Nerve is broken.`,
+    clues: `hair cells, auditory nerve, loud noise exposure, aging, cochlear implant` },
+
+  // ---------- SMELL & TASTE ----------
+  { n: "39", g: "smell", name: "Chemical senses (olfaction, gustation)",
+    def: `The <u>chemical senses</u> detect chemical molecules. <u>Olfaction</u> is the sense of smell, and <u>gustation</u> is the sense of taste.`,
+    ex: `Molecules from baking bread float into your nose (olfaction), and salt dissolves on your tongue (gustation).`,
+    trick: `OLFaction = OLFactory = nose. GUSTation = GUSTo (enjoying food) = tongue.`,
+    clues: `molecules, chemicals, nose, tongue, dissolved` },
+  { n: "40", g: "smell", name: "Thalamus (smell is not processed here)",
+    def: `The <u>thalamus</u> is the brain's sensory relay station that routes information from every sense to the cortex, except smell. Smell goes straight from the olfactory bulb to the olfactory cortex and the limbic system (amygdala, hippocampus).`,
+    ex: `The smell of sunscreen instantly brings back an emotional beach memory because smell reaches memory and emotion areas directly.`,
+    trick: `Thalamus = the mall's help desk for every sense. Smell skips the line.`,
+    clues: `relay station, sends signals to the cortex, bypasses, smell triggers vivid emotional memory` },
+  { n: "41", g: "smell", name: "Pheromones",
+    def: `<u>Pheromones</u> are chemical signals released by an animal that affect the behavior of others of the same species.`,
+    ex: `Ants leave a pheromone trail that other ants follow to food.`,
+    trick: `PHERomones = chemical messages sent to PEERS (same species).`,
+    clues: `chemical signal, same species, attraction, marks territory, ant trail` },
+  { n: "42", g: "smell", name: "Gustatory cells (six tastes)",
+    def: `<u>Gustatory cells</u> are taste receptor cells that respond to six basic tastes: sweet, sour, bitter, salty, <u>umami</u> (savory, like broth or meat), and <u>oleogustus</u> (fat).`,
+    extra: `<table class="mini"><thead><tr><th>Taste</th><th>Signals</th><th>Example</th></tr></thead><tbody>
+      <tr><td>Sweet</td><td>Energy source</td><td>Fruit</td></tr>
+      <tr><td>Salty</td><td>Sodium the body needs</td><td>Chips</td></tr>
+      <tr><td>Sour</td><td>Possibly toxic acid</td><td>Lemon</td></tr>
+      <tr><td>Bitter</td><td>Possible poison</td><td>Black coffee</td></tr>
+      <tr><td>Umami</td><td>Protein</td><td>Parmesan, broth</td></tr>
+      <tr><td>Oleogustus</td><td>Fat</td><td>Fries, butter</td></tr></tbody></table>`,
+    ex: `Spicy is NOT a taste. It is a pain signal.`,
+    trick: `"Sweet Sam Sips Bitter Umami Oil" (sweet, salty, sour, bitter, umami, oleogustus). OLEO = oil.`,
+    clues: `savory or meaty (umami), fatty or greasy (oleogustus)` },
+  { n: "43", g: "smell", name: "Taste receptors",
+    def: `<u>Taste receptors</u> are located in the taste buds on the tongue's papillae. They are replaced every week or two, and their number declines with age.`,
+    ex: `After burning his tongue on pizza, Ben can taste normally again in about a week.`,
+    trick: `Taste buds = fast regrowers.`,
+    clues: `taste buds, papillae, regrow, older adults taste less` },
+  { n: "44", g: "smell", name: "Supertasters, medium tasters, nontasters",
+    def: `<u>Supertasters</u> (about 25 percent) have more taste buds and find bitter and spicy flavors very intense. <u>Medium tasters</u> (about 50 percent) have average sensitivity. <u>Nontasters</u> (about 25 percent) have fewer taste buds and barely detect some bitter compounds.`,
+    ex: `Kayla gags on broccoli and black coffee, while her brother loves super spicy wings and finds broccoli bland.`,
+    trick: `SUPER = super-sensitive to bitter. NON = not bothered.`,
+    clues: `extremely bitter, picky about broccoli or coffee (super), can't taste the bitter strip (non)` },
+
+  // ---------- TOUCH & BODY ----------
+  { n: "45", g: "touch", name: "Touch",
+    def: `<u>Touch</u> is a mix of four basic skin senses: pressure, warmth, cold, and pain. Other skin sensations (like itch or wetness) are combinations of these.`,
+    ex: `Stroking pressure spots next to each other makes Ava feel a tickle.`,
+    trick: `Touch = P-W-C-P (Pressure, Warmth, Cold, Pain).`,
+    clues: `skin, pressure, texture, tickle, itch` },
+  { n: "46", g: "touch", name: "Hot = warm + cold receptors",
+    def: `The sensation of <u>hot</u> occurs when warm and cold receptors next to each other are stimulated at the same time.`,
+    ex: `In a lab, Noah grabs a coil of alternating warm and cold pipes and yanks his hand back because it feels burning hot.`,
+    trick: `Warm + Cold = HOT (no "hot receptors" exist).`,
+    clues: `warm and cold together, feels burning even though neither is hot` },
+  { n: "47", g: "touch", name: "Pain (gate-control theory)",
+    def: `<u>Gate-control theory</u> states that the spinal cord contains a neurological "gate" that either blocks pain signals or lets them pass to the brain. Small nerve fibers open the gate, while large fiber activity (rubbing, massage) and brain activity (distraction, focus) close it.`,
+    ex: `Jamal rubs his shin after hitting it on a table, and it hurts less. A soccer player does not feel a sprain until the game ends.`,
+    trick: `GATE in the spinal cord: rub it to shut it, distract to close it.`,
+    clues: `spinal cord, rubbing reduces pain, distraction, didn't feel it until later, acupuncture, massage` },
+  { n: "48", g: "touch", name: "Phantom limb syndrome",
+    def: `<u>Phantom limb syndrome</u> is when a person feels sensations, often pain, in a limb that has been amputated. It shows that the brain, not the limb, creates the experience of pain.`,
+    ex: `Months after losing his arm, a veteran feels an itch in fingers he no longer has.`,
+    trick: `PHANTOM = ghost limb that still "hurts."`,
+    clues: `amputated, missing limb, still feels, itch or pain in a limb that is gone` },
+  { n: "49", g: "touch", name: "Vestibular sense",
+    def: `The <u>vestibular sense</u> monitors the head's position and movement to keep balance. Its receptors are in the inner ear's semicircular canals and vestibular sacs.`,
+    ex: `After spinning on a tire swing, Mia feels dizzy and stumbles because the fluid in her semicircular canals is still moving.`,
+    trick: `VESTIBULAR = Very Essential for STaying BALanced. Inner ear fluid.`,
+    clues: `balance, dizzy, spinning, inner ear, semicircular canals, motion sickness, head tilt` },
+  { n: "50", g: "touch", name: "Kinesthesis",
+    def: `<u>Kinesthesis</u> is the sense of the position and movement of individual body parts, using receptors in the muscles, tendons, and joints.`,
+    ex: `With his eyes closed, Carlos can touch his nose because he knows where his hand is.`,
+    trick: `KINE = motion (like kinetic). Body parts know where they are.`,
+    clues: `position of limbs, eyes closed, muscles and joints, knows where arm is without looking` },
+
+  // ---------- PERCEPTION ----------
+  { n: "51", g: "perception", name: "Bottom-up and top-down processing",
+    def: `<u>Bottom-up processing</u> is analysis that begins with the sensory receptors and works up to the brain's interpretation, built only from the raw data. <u>Top-down processing</u> is information processing guided by expectations, experience, and knowledge.`,
+    ex: `A baby seeing a new toy for the first time uses bottom-up processing. You read "Th_ c_t s_t" as "The cat sat" using top-down processing.`,
+    trick: `Bottom-up = Building from the Basics. Top-down = Thinking with what you already know.`,
+    clues: `bottom-up: first time, no prior knowledge, pieces, raw features. Top-down: expects, prior experience, fills in, reads messy handwriting` },
+  { n: "52", g: "perception", name: "Schemas",
+    def: `A <u>schema</u> is a mental framework or concept that organizes and interprets information based on past experience.`,
+    ex: `Grace's schema for "classroom" includes desks and a board, so she notices right away when a room has neither.`,
+    trick: `Schema = mental file folder.`,
+    clues: `mental framework, concept, category, what she knows a ___ looks like` },
+  { n: "53", g: "perception", name: "Perceptual set",
+    def: `A <u>perceptual set</u> is a mental predisposition to perceive one thing and not another, based on what you expect.`,
+    ex: `After watching a documentary about Bigfoot, Aiden sees a tree stump in the woods as a crouching creature.`,
+    trick: `You are SET (primed and ready) to see what you expect.`,
+    clues: `expects to see, was told beforehand, primed, sees what he wants to see, ambiguous image` },
+  { n: "54", g: "perception", name: "Context",
+    def: `<u>Context</u> effects occur when the surrounding situation or information changes how a stimulus is perceived.`,
+    ex: `The same symbol reads as the letter B in "A B C" and the number 13 in "12 13 14."`,
+    trick: `Context = the surroundings change the meaning.`,
+    clues: `depending on what is around it, same object seen differently in a different setting` },
+  { n: "55", g: "perception", name: "Gestalt principles",
+    def: `<u>Gestalt</u> psychologists argued that the brain organizes sensations into meaningful wholes: the whole is different from the sum of its parts.`,
+    extra: `<ul>
+      <li><b>Closure:</b> filling in gaps to see a complete object. Example: a circle with gaps still looks like a circle.</li>
+      <li><b>Figure-ground:</b> separating an object (figure) from its surroundings (ground). Example: the vase-or-two-faces picture.</li>
+      <li><b>Proximity:</b> grouping things that are near each other. Example: seeing "oo oo oo" as three pairs.</li>
+      <li><b>Similarity:</b> grouping things that look alike. Example: seeing rows of X's and O's as separate rows.</li></ul>`,
+    ex: `The vase-or-faces picture (figure-ground) and a dotted circle that still looks like a circle (closure).`,
+    trick: `Gestalt = "whole form." C-F-P-S: Closure, Figure-ground, Proximity, Similarity.`,
+    clues: `closure: incomplete, gaps. Figure-ground: stands out from background. Proximity: close together. Similarity: same color, shape, uniform` },
+  { n: "56", g: "perception", name: "Attention",
+    def: `<u>Attention</u> is the process of focusing awareness on a limited set of information. Our capacity for conscious attention is limited.`,
+    ex: `You can't fully follow a podcast and a text conversation at the same time.`,
+    trick: `Attention = a spotlight, not a floodlight.`,
+    clues: `focus, limited capacity, multitasking fails` },
+  { n: "57", g: "perception", name: "Selective attention",
+    def: `<u>Selective attention</u> is focusing conscious awareness on one particular stimulus while ignoring others.`,
+    ex: `While studying, Nia focuses on her notes and does not notice the hum of the refrigerator.`,
+    trick: `SELECT one channel.`,
+    clues: `focuses on one, tunes out, concentrates` },
+  { n: "58", g: "perception", name: "Cocktail party effect",
+    def: `The <u>cocktail party effect</u> is the ability to attend to one voice among many, while still noticing when an important word, like your own name, is spoken elsewhere.`,
+    ex: `At a loud party, Kevin is talking with a friend but instantly turns when someone across the room says "Kevin."`,
+    trick: `Your NAME breaks through the party noise.`,
+    clues: `crowded room, hears own name, noisy cafeteria, one voice among many` },
+  { n: "59", g: "perception", name: "Change blindness",
+    def: `<u>Change blindness</u> is failing to notice a change in the environment.`,
+    ex: `A person giving directions is swapped with a different person during a brief interruption, and the tourist does not notice.`,
+    trick: `CHANGE blindness = something CHANGED and you missed it.`,
+    clues: `swapped, replaced, changed during a cut, continuity errors in movies` },
+  { n: "60", g: "perception", name: "Inattentional blindness",
+    def: `<u>Inattentional blindness</u> is failing to see a visible object when attention is directed elsewhere.`,
+    ex: `Players counting basketball passes do not notice a person in a gorilla suit walking through the game.`,
+    trick: `IN-ATTENTION = not attending to it, so it's invisible. Nothing changed; it was there the whole time.`,
+    clues: `so focused on X that she didn't see Y, gorilla, texting and missed the clown` },
+  { n: "61", g: "perception", name: "Sensory adaptation (repeat)",
+    def: `Same as term 7. <u>Sensory adaptation</u> is diminished sensitivity to a constant, unchanging stimulus.`,
+    ex: `You stop hearing the classroom air conditioner after a few minutes.`,
+    trick: `Receptors tune OUT what never changes.`,
+    clues: `after a while, no longer notices, constant` },
+  { n: "62", g: "perception", name: "Visual cliff",
+    def: `The <u>visual cliff</u> is a laboratory device (Gibson and Walk) that tests depth perception in infants and young animals using a glass surface over an apparent drop-off.`,
+    ex: `A 9-month-old refuses to crawl onto the glass over the "deep" side even when her mother calls her.`,
+    trick: `Babies won't go over the CLIFF, so depth perception appears early (partly innate).`,
+    clues: `infants, glass tabletop, drop-off, crawl, mother calls from the other side` },
+  { n: "63", g: "perception", name: "Binocular depth cues",
+    def: `<u>Binocular cues</u> are depth cues that need both eyes. <u>Retinal disparity</u> means the brain compares the slightly different images from each eye: the bigger the difference, the closer the object. <u>Convergence</u> means the eyes turn inward to focus on close objects: the more inward strain, the closer the object.`,
+    ex: `Retinal disparity: 3D movie glasses feed each eye a different image. Convergence: your eyes cross as you bring a finger toward your nose.`,
+    trick: `Disparity = Different pictures. Convergence = eyes Come together (muscle strain).`,
+    clues: `disparity: two images, 3D glasses, finger "jumps" when you switch eyes. Convergence: eyes turn inward, cross-eyed, muscle strain` },
+  { n: "64", g: "perception", name: "Monocular depth cues",
+    def: `<u>Monocular cues</u> are depth cues available to each eye alone. Artists use them to make flat pictures look 3D.`,
+    diagrams: true,
+    ex: `A painting of a road that narrows into the distance with faded, hazy mountains behind it.`,
+    trick: `"Clear Size Texture Lines Overlap" (clarity, size, texture gradient, linear perspective, interposition).`,
+    clues: `hazy (clarity), smaller (size), finer and denser (texture), lines converge (linear perspective), blocks or overlaps (interposition)` },
+  { n: "65", g: "perception", name: "Perceptual constancy",
+    def: `<u>Perceptual constancy</u> is perceiving objects as unchanging (consistent size, shape, color, and lightness) even as lighting and retinal images change.`,
+    extra: `<ul>
+      <li><b>Size constancy:</b> a car driving away looks the same size even though its retinal image shrinks.</li>
+      <li><b>Shape constancy:</b> a door swinging open still looks rectangular even though its image becomes a trapezoid.</li>
+      <li><b>Color constancy:</b> a red apple still looks red in dim evening light.</li>
+      <li><b>Lightness constancy:</b> white paper in shadow still looks white because its brightness relative to its surroundings stays the same.</li></ul>`,
+    ex: `Your friend walking away does not look like they are shrinking.`,
+    trick: `CONSTANT = the brain keeps the object the same.`,
+    clues: `still looks the same size/shape/color, even though the image on the retina changes, different lighting` },
+  { n: "66", g: "perception", name: "Apparent motion",
+    def: `<u>Apparent motion</u> is perceiving movement where none actually exists.`,
+    extra: `<ul>
+      <li><b>Stroboscopic motion:</b> a rapid series of slightly different still images is seen as continuous motion. Example: a flipbook or a movie.</li>
+      <li><b>Phi phenomenon:</b> two or more adjacent lights blinking on and off in quick succession appear to be one light moving. Example: marquee lights or a railroad crossing signal.</li>
+      <li><b>Autokinetic effect:</b> a stationary point of light in a completely dark room appears to drift. Example: a lone star seems to wander.</li></ul>`,
+    ex: `Movies are 24 still frames per second, yet you see smooth motion.`,
+    trick: `Strobe = Still pictures (frames). Phi = Flashing lights. Auto = Alone in the dark.`,
+    clues: `flipbook, film frames (stroboscopic). Blinking lights, marquee (phi). Single light, dark room, seems to move (autokinetic)` }
+];
+
+// Text sketches for term 64
+const MONO_DIAGRAMS = [
+  { name: "Relative clarity", how: "Hazy or blurry objects seem farther away than sharp, clear ones. Sketch: a dark, detailed mountain in front and a faint, fuzzy one behind it.",
+    art: `FAR:   . . . : : : . . .     (faint, hazy, blurry)
+NEAR:  ##### ##### #####     (sharp, dark, detailed)` },
+  { name: "Relative size", how: "If two objects are assumed to be the same size, the one that looks smaller seems farther away. Sketch: three stick people of shrinking size.",
+    art: `   O
+  /|\\        o
+  / \\       /|\\      .
+           / \\      i
+  NEAR     MIDDLE   FAR` },
+  { name: "Texture gradient", how: "Coarse, spread-out texture looks near; fine, crowded texture looks far. Sketch: dots that get smaller and closer together toward the top.",
+    art: `.............................   <- FAR: tiny, packed tight
+.  .  .  .  .  .  .  .  .  .
+.   .   .   .   .   .   .
+.     .     .     .     .
+.        .        .        .   <- NEAR: big gaps, coarse` },
+  { name: "Linear perspective", how: "Parallel lines, like railroad tracks, appear to meet in the distance. Sketch: two lines wide at the bottom meeting near the top.",
+    art: `           ||         <- FAR: lines almost touch
+          /  \\
+         /    \\
+        /      \\
+       /        \\
+      /          \\    <- NEAR: lines wide apart` },
+  { name: "Interposition (overlap)", how: "If one object partly blocks another, the blocked one is seen as farther away. Sketch: a square partly covering a shape behind it.",
+    art: `   +---------+
+   |  BACK   |
+   |     +---------+
+   +-----|  FRONT  |    FRONT blocks BACK,
+         |         |    so BACK looks farther
+         +---------+` }
+];
+
+const CONFUSED = {
+  basics: [
+    ["Sensation vs perception", "Sensation detects raw input. Perception interprets it.", "\"detects\" vs \"recognizes / interprets\""],
+    ["Sensation vs transduction", "Transduction is the specific step of converting energy into neural signals.", "\"converts into neural impulses\""],
+    ["Absolute threshold vs JND", "Absolute = detecting a stimulus at all. JND = detecting a change between two.", "\"hear it at all\" vs \"notice it got louder\""],
+    ["JND vs Weber's Law", "JND is the difference itself. Weber's Law is the rule that it is a constant percentage.", "\"smallest change\" vs \"proportion / percentage\""],
+    ["Sensory adaptation vs selective attention", "Adaptation is receptors firing less. Selective attention is choosing what to focus on.", "\"over time, stops noticing\" vs \"focuses on one thing\""],
+    ["Sensory interaction vs synesthesia", "Interaction: one sense changes another's accuracy (normal). Synesthesia: one sense triggers a different sensation (unusual).", "\"tastes bland with a cold\" vs \"sees colors when hearing\""]
+  ],
+  vision: [
+    ["Rods vs cones", "Rods: dim light, black/white, periphery, about 120 million. Cones: color, detail, bright light, fovea, about 6 million.", "\"at night\" = rods. \"color / fine detail\" = cones"],
+    ["Trichromatic vs opponent-process", "Trichromatic: three cone types at the retina. Opponent-process: color pairs after the retina, explains afterimages.", "\"three types of cones\" vs \"afterimage / opposite color\""],
+    ["Fovea vs blind spot", "Fovea: most cones, sharpest vision. Blind spot: no receptors, no vision.", "\"sharpest\" vs \"optic nerve leaves / dot disappears\""],
+    ["Lens vs accommodation", "Lens is the structure. Accommodation is the lens changing shape.", "\"structure\" vs \"process of changing shape\""],
+    ["Nearsighted vs farsighted", "Near: sees near, focuses in front of retina. Far: sees far, focuses behind retina.", "\"can't see the board\" vs \"can't read a book\""],
+    ["Dichromatism vs monochromatism", "Di: two cone types, some colors confused. Mono: one or none, all gray.", "\"red-green\" vs \"only shades of gray\""],
+    ["Prosopagnosia vs blindsight", "Prosopagnosia: sees faces but can't recognize them. Blindsight: can't consciously see but still responds.", "\"faces\" vs \"says they can't see, but reacts\""],
+    ["Ganglion cells vs retina", "Ganglion cells are one layer of neurons in the retina whose axons form the optic nerve.", "\"form the optic nerve\""]
+  ],
+  hearing: [
+    ["Frequency vs amplitude", "Frequency = pitch (high/low). Amplitude = loudness (soft/loud).", "\"note, pitch\" vs \"volume, decibels\""],
+    ["Place vs frequency theory", "Place: WHERE on the basilar membrane, high pitches. Frequency: HOW FAST neurons fire, low pitches.", "\"location\" vs \"rate of firing\""],
+    ["Frequency theory vs volley principle", "Volley is the add-on: neurons take turns so the group can fire faster.", "\"take turns / alternate firing\""],
+    ["Conduction vs sensorineural deafness", "Conduction: eardrum or bones (mechanical), hearing aid. Sensorineural: hair cells or nerve, cochlear implant.", "\"eardrum / bones\" vs \"hair cells / loud music / nerve\""],
+    ["Sound localization vs place theory", "Localization = direction of the sound in space. Place theory = pitch.", "\"where the sound came from\" vs \"how high the note is\""]
+  ],
+  smell: [
+    ["Olfaction vs gustation", "Olfaction = smell (nose). Gustation = taste (tongue).", "\"aroma\" vs \"flavor on the tongue\""],
+    ["Smell vs other senses at the thalamus", "All senses relay through the thalamus except smell.", "\"bypasses the thalamus\" = smell"],
+    ["Pheromones vs olfaction", "Pheromones are chemical signals between members of a species. Olfaction is the whole sense of smell.", "\"same species / attraction / trail\""],
+    ["Umami vs oleogustus", "Umami = savory protein. Oleogustus = fat.", "\"broth, meat\" vs \"greasy, oily\""],
+    ["Supertaster vs nontaster", "Super: more taste buds, bitter is intense. Non: fewer buds, bitter barely noticed.", "\"can't stand bitter\" vs \"can't taste it\""],
+    ["Sensory interaction vs taste", "A cold dulling flavor is sensory interaction (smell affects taste), not a taste receptor problem.", "\"stuffy nose\""]
+  ],
+  touch: [
+    ["Vestibular vs kinesthesis", "Vestibular: whole-body balance, head position, inner ear. Kinesthesis: where individual body parts are, muscles and joints.", "\"dizzy, balance, spinning\" vs \"touches nose with eyes closed\""],
+    ["Gate-control vs phantom limb", "Gate-control explains pain changing because of spinal cord signals and attention. Phantom limb is pain in a missing limb.", "\"rubbing / distraction\" vs \"amputated\""],
+    ["Hot sensation vs pain", "Hot comes from warm + cold receptors firing together, not pain receptors.", "\"warm and cold at once\""],
+    ["Gate-control vs sensory adaptation", "Gate-control: pain blocked by other signals or focus. Adaptation: receptors fire less to a constant stimulus.", "\"distracted / rubs it\" vs \"stops noticing over time\""]
+  ],
+  perception: [
+    ["Bottom-up vs top-down", "Bottom-up starts with raw data, no expectations. Top-down uses experience and expectations.", "\"first time, never seen\" vs \"expects, knows, fills in\""],
+    ["Schema vs perceptual set vs context", "Schema: stored mental framework. Perceptual set: expectation at the moment. Context: the surroundings change the meaning.", "\"framework / concept\" vs \"expected to see\" vs \"what's around it\""],
+    ["Selective attention vs inattentional blindness vs change blindness", "Selective: chooses to focus on one thing. Inattentional: misses something that was THERE. Change: misses something that CHANGED.", "\"focuses on\" vs \"never saw the gorilla\" vs \"didn't notice it was swapped\""],
+    ["Cocktail party effect vs selective attention", "Cocktail party is a special case: an important stimulus (your name) breaks through selective attention.", "\"hears own name\""],
+    ["Retinal disparity vs convergence", "Disparity: two slightly different images compared. Convergence: eyes turn inward, muscle strain.", "\"different images / 3D\" vs \"eyes cross / strain\""],
+    ["Relative size vs size constancy", "Relative size is a depth cue (smaller = farther). Size constancy is knowing an object's true size stays the same.", "\"judges distance\" vs \"still thinks it is the same size\""],
+    ["Linear perspective vs texture gradient", "Linear perspective: parallel LINES converge. Texture gradient: surface DETAIL gets finer.", "\"tracks, road edges\" vs \"grass, tiles, pebbles\""],
+    ["Phi phenomenon vs stroboscopic motion", "Phi: blinking LIGHTS in sequence. Stroboscopic: a series of still IMAGES.", "\"lights, marquee\" vs \"frames, flipbook, movie\""],
+    ["Autokinetic vs phi", "Autokinetic: ONE stationary light in the dark. Phi: SEVERAL lights blinking in order.", "\"single light, dark\" vs \"row of lights\""],
+    ["Closure vs figure-ground", "Closure fills gaps. Figure-ground separates object from background.", "\"incomplete lines\" vs \"vase or faces / stands out\""],
+    ["Proximity vs similarity", "Proximity: grouped by nearness. Similarity: grouped by looking alike.", "\"close together\" vs \"same color or shape\""]
+  ]
+};
+
+const CHEAT = [
+  ["detects, receives", "Sensation", "Perception (interprets, recognizes)"],
+  ["converts energy into neural signals", "Transduction", "Sensation"],
+  ["faintest, at all, 50%", "Absolute threshold", "JND (a change between two)"],
+  ["proportion, percentage, depends on starting amount", "Weber's Law", "JND (the difference itself)"],
+  ["stops noticing over time", "Sensory adaptation", "Selective attention (chooses focus)"],
+  ["stuffy nose, food tastes bland", "Sensory interaction", "Synesthesia (hears colors)"],
+  ["night, dim, gray, edges", "Rods", "Cones (color, detail, fovea)"],
+  ["three types of cones", "Trichromatic", "Opponent-process (pairs, afterimages)"],
+  ["stares, then sees opposite color", "Opponent-process / afterimage", "Trichromatic"],
+  ["sharpest point, most cones", "Fovea", "Blind spot (optic nerve exits, no receptors)"],
+  ["can't see the board", "Nearsighted (focus in front)", "Farsighted (focus behind, can't read up close)"],
+  ["lens changes shape", "Accommodation", "Convergence (eyes turn inward)"],
+  ["two cones, red-green", "Dichromatism", "Monochromatism (all gray)"],
+  ["can't recognize faces", "Prosopagnosia", "Blindsight (says blind, still reacts)"],
+  ["high pitch, location on membrane", "Place theory", "Frequency theory (low pitch, firing rate)"],
+  ["neurons take turns", "Volley principle", "Place theory"],
+  ["eardrum, bones, hearing aid", "Conduction deafness", "Sensorineural (hair cells, nerve, loud noise)"],
+  ["smell triggers emotional memory", "Smell bypasses the thalamus", "Thalamus relay"],
+  ["savory, broth", "Umami", "Oleogustus (fat)"],
+  ["warm and cold together", "Hot", "Pain"],
+  ["rubbing it, distracted, felt it later", "Gate-control", "Phantom limb (missing limb)"],
+  ["dizzy, balance, inner ear", "Vestibular", "Kinesthesis (limb position, eyes closed)"],
+  ["first time, no prior knowledge", "Bottom-up", "Top-down (expects, experience)"],
+  ["was told what to expect", "Perceptual set", "Schema (stored framework), context (surroundings)"],
+  ["hears own name in a crowd", "Cocktail party effect", "Selective attention"],
+  ["something was swapped or changed", "Change blindness", "Inattentional blindness (it was there, didn't see it)"],
+  ["two different images, 3D", "Retinal disparity", "Convergence (eye strain)"],
+  ["hazy, blurry", "Relative clarity", "Relative size"],
+  ["parallel lines meet", "Linear perspective", "Texture gradient (detail gets finer)"],
+  ["blocks, overlaps", "Interposition", "Relative size"],
+  ["still same size / shape / color", "Perceptual constancy", "Relative size (depth cue)"],
+  ["blinking lights in a row", "Phi phenomenon", "Stroboscopic (still frames, flipbook)"],
+  ["one light, dark room", "Autokinetic effect", "Phi phenomenon"],
+  ["close together", "Proximity", "Similarity (look alike)"],
+  ["vase or faces", "Figure-ground", "Closure (fills gaps)"]
+];
+
+const CHEAT_NOTE = "On two-blank questions, the most common wrong answer is the correct pair in reverse order. Check the order every time.";
+const NUMBERS = "Rods about 120 million, cones about 6 million. Supertasters about 25%, medium about 50%, nontasters about 25%. Wavelengths: blue short, green medium, red long. Weber: find the percentage, then apply it to the new amount.";
+
+// Practice test (sections 1-4, 105 questions) + bonus quiz pool.
+// s = section, t = type, q = stem, items = numbered list for "which two", html = extra exhibit,
+// c = choices A-E, a = correct letter, why = reason, tempt = most tempting wrong answer, tags = terms tested.
+
+const SECTIONS = {
+  1: "Section 1: Warm-up",
+  2: "Section 2: Core application",
+  3: "Section 3: Harder application",
+  4: "Section 4: Mixed review",
+  5: "Bonus (quiz pool only)"
+};
+
+const QUESTIONS = [
+  // ===== SECTION 1 =====
+  { s:1, t:"definition", q:`Sensation is best defined as`,
+    c:[`the process of organizing and interpreting sensory information`,`the conversion of one form of energy into neural impulses`,`the process by which sensory receptors and the nervous system receive stimulus energy from the environment`,`diminished sensitivity to an unchanging stimulus`,`the minimum stimulation needed to detect a stimulus 50 percent of the time`],
+    a:"C", why:`Sensation is receiving raw stimulus energy.`, tempt:`A is perception (interpreting).`, tags:["Sensation","Perception"] },
+  { s:1, t:"scenario", q:`Rosa walks into a bakery and immediately recognizes the smell as cinnamon rolls. Recognizing the smell is an example of`,
+    c:[`sensation`,`perception`,`transduction`,`sensory adaptation`,`absolute threshold`],
+    a:"B", why:`Recognizing and naming the smell is interpretation.`, tempt:`A, sensation is only detecting the smell.`, tags:["Perception","Sensation"] },
+  { s:1, t:"scenario", q:`During a hearing test, an audiologist plays softer and softer tones to find the quietest tone Marcus can detect half of the time. She is measuring his`,
+    c:[`just-noticeable difference`,`Weber's constant`,`absolute threshold`,`sensory adaptation`,`sensory interaction`],
+    a:"C", why:`Quietest tone detected 50% of the time = absolute threshold.`, tempt:`A, JND compares two stimuli.`, tags:["Absolute threshold","JND"] },
+  { s:1, t:"scenario", q:`Keisha jumps into a cold pool. After a few minutes, the water no longer feels cold. This is an example of`,
+    c:[`sensory adaptation`,`selective attention`,`sensory interaction`,`transduction`,`inattentional blindness`],
+    a:"A", why:`Receptors stop responding to an unchanging stimulus.`, tempt:`B, she did not choose to ignore it.`, tags:["Sensory adaptation"] },
+  { s:1, t:"scenario", q:`Hair cells in Andre's cochlea change sound vibrations into electrical signals his brain can read. This process is called`,
+    c:[`accommodation`,`perception`,`sensory adaptation`,`transduction`,`closure`],
+    a:"D", why:`Changing vibrations into neural signals is transduction.`, tempt:`B, perception happens later in the brain.`, tags:["Transduction"] },
+  { s:1, t:"scenario", q:`Omar has a bad cold and says his mom's lasagna "tastes like nothing." This is best explained by`,
+    c:[`synesthesia`,`sensory adaptation`,`being a nontaster`,`the absolute threshold`,`sensory interaction`],
+    a:"E", why:`Smell (blocked nose) affects taste.`, tempt:`A, synesthesia is one sense triggering a different sensation, not dulling it.`, tags:["Sensory interaction","Synesthesia"] },
+  { s:1, t:"scenario", q:`Priya says the letter A is always red and that hearing a violin makes her see swirling green. Priya most likely has`,
+    c:[`sensory interaction`,`synesthesia`,`prosopagnosia`,`blindsight`,`a perceptual set`],
+    a:"B", why:`Letters and sounds triggering colors = synesthesia.`, tempt:`A, sensory interaction changes accuracy, not creates colors.`, tags:["Synesthesia","Sensory interaction"] },
+  { s:1, t:"definition", q:`The light-sensitive surface at the back of the eye that contains the rods and cones is the`,
+    c:[`lens`,`fovea`,`optic nerve`,`pupil`,`retina`],
+    a:"E", why:`The retina holds rods and cones.`, tempt:`B, the fovea is only the center of the retina.`, tags:["Retina","Fovea"] },
+  { s:1, t:"scenario", q:`Walking on a dark trail at night, Luis can see the shapes of trees but not their colors. Which receptors are mainly responsible?`,
+    c:[`Rods`,`Cones`,`Ganglion cells`,`Bipolar cells`,`Hair cells`],
+    a:"A", why:`Rods work in dim light and see no color.`, tempt:`B, cones need bright light.`, tags:["Rods","Cones"] },
+  { s:1, t:"scenario", q:`Jen can see the whiteboard clearly from the front row but not from the back row. She has no trouble reading her textbook. Jen is most likely`,
+    c:[`farsighted`,`monochromatic`,`nearsighted`,`dichromatic`,`experiencing blindsight`],
+    a:"C", why:`Nearsighted people see near things clearly.`, tempt:`A, the name trips people up: farsighted people see FAR.`, tags:["Near/farsightedness"] },
+  { s:1, t:"scenario", q:`Tasha looks up from her phone to a distant mountain, and her lens flattens so the mountain comes into focus. This is`,
+    c:[`convergence`,`transduction`,`retinal disparity`,`accommodation`,`sensory adaptation`],
+    a:"D", why:`Lens changing shape = accommodation.`, tempt:`A, convergence is the eyes turning, not the lens.`, tags:["Accommodation","Convergence"] },
+  { s:1, t:"definition", q:`The point where the optic nerve leaves the eye, which contains no receptor cells, is the`,
+    c:[`fovea`,`blind spot`,`lens`,`retina`,`iris`],
+    a:"B", why:`No receptors where the optic nerve leaves.`, tempt:`A, the fovea has the MOST receptors.`, tags:["Blind spot","Fovea"] },
+  { s:1, t:"scenario", q:`Carlos stares at a green, black, and yellow flag for 60 seconds, then looks at a white wall and sees a red, white, and blue flag. Which theory best explains this?`,
+    c:[`Trichromatic theory`,`Place theory`,`Frequency theory`,`Gate-control theory`,`Opponent-process theory`],
+    a:"E", why:`Opposite-color afterimages support opponent-process.`, tempt:`A, trichromatic cannot explain afterimages.`, tags:["Opponent-process","Afterimages","Trichromatic"] },
+  { s:1, t:"scenario", q:`A tuba plays a low note and a piccolo plays a high note. The difference in the notes is due mainly to differences in`,
+    c:[`frequency (wavelength)`,`amplitude`,`the place the sound came from`,`sound localization`,`decibel level`],
+    a:"A", why:`Frequency/wavelength determines pitch.`, tempt:`B, amplitude is loudness.`, tags:["Pitch (frequency)","Amplitude"] },
+  { s:1, t:"scenario", q:`Deshawn turns up the volume on his speaker without changing the song. Which property of the sound waves changed?`,
+    c:[`Frequency`,`Wavelength`,`Pitch`,`Amplitude`,`The volley principle`],
+    a:"D", why:`Volume = amplitude.`, tempt:`C, pitch did not change.`, tags:["Amplitude","Pitch (frequency)"] },
+  { s:1, t:"scenario", q:`Luca's eardrum was punctured during a scuba dive. Sounds are muffled, but a hearing aid helps. Luca most likely has`,
+    c:[`sensorineural deafness`,`conduction deafness`,`nerve deafness`,`damaged hair cells`,`a problem with sound localization only`],
+    a:"B", why:`Eardrum damage is mechanical: conduction deafness.`, tempt:`A, sensorineural is hair cells or the nerve.`, tags:["Conduction deafness","Sensorineural deafness"] },
+  { s:1, t:"definition", q:`Olfaction and gustation are known as the`,
+    c:[`body senses`,`vestibular senses`,`kinesthetic senses`,`chemical senses`,`skin senses`],
+    a:"D", why:`Smell and taste detect chemicals.`, tempt:`E, skin senses are touch.`, tags:["Chemical senses"] },
+  { s:1, t:"scenario", q:`Ants in Mia's ant farm follow the exact trail the first ant took to a cookie crumb. The ants are most likely responding to`,
+    c:[`gustatory cells`,`umami`,`taste receptors`,`the vestibular sense`,`pheromones`],
+    a:"E", why:`Chemical signals within a species.`, tempt:`A, gustatory cells are for taste.`, tags:["Pheromones"] },
+  { s:1, t:"scenario", q:`After spinning on a merry-go-round, Aaliyah feels dizzy and stumbles when she gets off. Which sense is involved?`,
+    c:[`Kinesthesis`,`Gustation`,`The vestibular sense`,`Olfaction`,`Sensory interaction`],
+    a:"C", why:`Dizziness and balance = vestibular.`, tempt:`A, kinesthesis is body-part position.`, tags:["Vestibular sense","Kinesthesis"] },
+  { s:1, t:"scenario", q:`With his eyes closed, Daniel can touch his nose with his finger. This is possible because of`,
+    c:[`kinesthesis`,`the vestibular sense`,`convergence`,`sensory adaptation`,`gate-control theory`],
+    a:"A", why:`Knowing where your hand is = kinesthesis.`, tempt:`B, vestibular is balance.`, tags:["Kinesthesis","Vestibular sense"] },
+  { s:1, t:"scenario", q:`Nathan's leg was amputated after an accident. Months later, he still feels itching in his missing foot. Nathan is experiencing`,
+    c:[`gate-control theory`,`kinesthesis`,`phantom limb syndrome`,`sensory adaptation`,`blindsight`],
+    a:"C", why:`Sensation in a missing limb.`, tempt:`A, gate-control explains pain being blocked, not a missing limb.`, tags:["Phantom limb","Gate-control"] },
+  { s:1, t:"two-blank", q:`Rods are to ____ as cones are to ____.`,
+    c:[`color; dim light`,`peripheral vision; fine detail`,`fine detail; peripheral vision`,`the fovea; the blind spot`,`bright light; night vision`],
+    a:"B", why:`Rods: periphery. Cones: fine detail.`, tempt:`C is the reversed pair.`, tags:["Rods","Cones"] },
+  { s:1, t:"scenario", q:`Ella hits her elbow on a desk. She rubs it, and the pain feels less intense. This is best explained by`,
+    c:[`opponent-process theory`,`phantom limb syndrome`,`sensory interaction`,`gate-control theory`,`Weber's Law`],
+    a:"D", why:`Rubbing activates large fibers that close the pain gate.`, tempt:`C, this is about pain signals, not two senses.`, tags:["Gate-control"] },
+  { s:1, t:"definition", q:`Bottom-up processing is best defined as`,
+    c:[`information processing guided by expectations and experience`,`a mental predisposition to perceive one thing and not another`,`organizing sensations into meaningful wholes`,`focusing awareness on one stimulus while ignoring others`,`analysis that begins with the sensory receptors and works up to the brain`],
+    a:"E", why:`Bottom-up starts at the receptors.`, tempt:`A is top-down.`, tags:["Bottom-up/top-down"] },
+  { s:1, t:"scenario", q:`A 9-month-old refuses to crawl across a glass surface that looks like a sudden drop-off, even while her mother calls her from the other side. This describes the`,
+    c:[`visual cliff`,`phi phenomenon`,`retinal disparity test`,`perceptual set study`,`autokinetic effect`],
+    a:"A", why:`Glass over a drop-off = visual cliff.`, tempt:`C, retinal disparity is a cue, not the experiment.`, tags:["Visual cliff"] },
+  { s:1, t:"scenario", q:`Mr. Park is chatting with a friend in a loud cafeteria but turns immediately when someone across the room says his name. This is`,
+    c:[`inattentional blindness`,`the cocktail party effect`,`change blindness`,`sensory adaptation`,`perceptual set`],
+    a:"B", why:`Hearing your own name across a noisy room.`, tempt:`D, not about a constant stimulus.`, tags:["Cocktail party effect","Selective attention"] },
+  { s:1, t:"scenario", q:`While counting passes in a basketball video, Hannah completely fails to notice a person in a gorilla suit walking across the court. Hannah is showing`,
+    c:[`change blindness`,`the cocktail party effect`,`sensory adaptation`,`inattentional blindness`,`prosopagnosia`],
+    a:"D", why:`Missed something visible while focused elsewhere.`, tempt:`A, nothing changed.`, tags:["Inattentional blindness","Change blindness"] },
+  { s:1, t:"scenario", q:`The lights around a movie theater sign blink in sequence and look like a single light traveling around the sign. This is`,
+    c:[`stroboscopic motion`,`the autokinetic effect`,`the phi phenomenon`,`figure-ground`,`closure`],
+    a:"C", why:`Blinking lights in sequence = phi.`, tempt:`A, stroboscopic uses still images.`, tags:["Phi phenomenon","Stroboscopic motion"] },
+  { s:1, t:"scenario", q:`Aiden draws two railroad tracks that come together near the top of his paper to show distance. He is using`,
+    c:[`texture gradient`,`relative size`,`interposition`,`convergence`,`linear perspective`],
+    a:"E", why:`Parallel lines converging = linear perspective.`, tempt:`D, convergence is a binocular eye-muscle cue.`, tags:["Linear perspective","Convergence"] },
+  { s:1, t:"definition", q:`The tendency to fill in gaps to perceive a complete, whole object is the Gestalt principle of`,
+    c:[`closure`,`proximity`,`similarity`,`figure-ground`,`interposition`],
+    a:"A", why:`Filling gaps = closure.`, tempt:`D, figure-ground separates object from background.`, tags:["Gestalt"] },
+  { s:1, t:"data", q:`Jordan can just barely notice when 2 ounces are added to a 40-ounce weight. According to Weber's Law, how much must be added to an 80-ounce weight for him to notice the difference?`,
+    c:[`1 ounce`,`2 ounces`,`4 ounces`,`8 ounces`,`40 ounces`],
+    a:"C", why:`2/40 = 5%, and 5% of 80 = 4.`, tempt:`B, Weber's Law uses a percentage, not a fixed amount.`, tags:["Weber's Law"] },
+  { s:1, t:"two-blank", q:`Trichromatic theory focuses on ____, while opponent-process theory best explains ____.`,
+    c:[`afterimages; three types of cones in the retina`,`three types of cones in the retina; afterimages`,`high-pitched sounds; low-pitched sounds`,`the blind spot; the fovea`,`rods; ganglion cells`],
+    a:"B", why:`Trichromatic = three cones. Opponent = afterimages.`, tempt:`A is reversed.`, tags:["Trichromatic","Opponent-process"] },
+  { s:1, t:"scenario", q:`Kayla finds broccoli and black coffee unbearably bitter and has more taste buds than most people. Kayla is most likely a`,
+    c:[`nontaster`,`medium taster`,`synesthete`,`supertaster`,`monochromat`],
+    a:"D", why:`Intense bitter + extra taste buds.`, tempt:`A, nontasters barely taste bitter.`, tags:["Supertasters"] },
+  { s:1, t:"scenario", q:`As a car drives away, its image on Jada's retina gets smaller, but she does not think the car itself is shrinking. This is`,
+    c:[`relative size`,`shape constancy`,`linear perspective`,`color constancy`,`size constancy`],
+    a:"E", why:`The car keeps its perceived size.`, tempt:`A, relative size judges distance, not unchanging size.`, tags:["Perceptual constancy","Relative size"] },
+  { s:1, t:"definition", q:`The minimum difference between two stimuli that a person can detect 50 percent of the time is the`,
+    c:[`just-noticeable difference`,`absolute threshold`,`Weber's Law`,`sensory adaptation`,`sensory interaction`],
+    a:"A", why:`Difference between two stimuli = JND.`, tempt:`B, absolute threshold is about detecting one stimulus at all.`, tags:["JND","Absolute threshold"] },
+
+  // ===== SECTION 2 =====
+  { s:2, t:"scenario", q:`Dr. Alvarez works with patients who cannot recognize the faces of their own family members but can identify them by their voices. These patients most likely have`,
+    c:[`blindsight`,`prosopagnosia`,`monochromatism`,`inattentional blindness`,`change blindness`],
+    a:"B", why:`Can't recognize faces = prosopagnosia.`, tempt:`A, blindsight is about not consciously seeing.`, tags:["Prosopagnosia","Blindsight"] },
+  { s:2, t:"scenario", q:`After a stroke damaged his visual cortex, Mr. Holt insists he cannot see anything on his left side. Yet when a light flashes there, he points right at it. Mr. Holt is showing`,
+    c:[`prosopagnosia`,`change blindness`,`blindsight`,`phantom limb syndrome`,`inattentional blindness`],
+    a:"C", why:`Responds to what he says he can't see.`, tempt:`E, inattentional blindness is about attention, not brain damage.`, tags:["Blindsight"] },
+  { s:2, t:"two-blank", q:`Place theory best explains how we hear ____ sounds, and frequency theory best explains how we hear ____ sounds.`,
+    c:[`low-pitched; high-pitched`,`loud; soft`,`soft; loud`,`high-pitched; low-pitched`,`nearby; distant`],
+    a:"D", why:`Place = high, frequency = low.`, tempt:`A is reversed.`, tags:["Place theory","Frequency theory"] },
+  { s:2, t:"scenario", q:`After years of working in a loud factory without ear protection, Gerald has damage to the hair cells in his cochlea. Gerald most likely has`,
+    c:[`conduction deafness`,`sensory adaptation`,`a punctured eardrum`,`prosopagnosia`,`sensorineural deafness`],
+    a:"E", why:`Hair cell damage = sensorineural.`, tempt:`A, conduction is eardrum or bones.`, tags:["Sensorineural deafness","Conduction deafness"] },
+  { s:2, t:"except", q:`All of the following are monocular depth cues EXCEPT`,
+    c:[`convergence`,`relative size`,`interposition`,`texture gradient`,`linear perspective`],
+    a:"A", why:`Convergence needs two eyes.`, tempt:`D, texture gradient is monocular.`, tags:["Convergence","Monocular cues"] },
+  { s:2, t:"two-blank", q:`Grandma Lucy holds the restaurant menu at arm's length to read it but can see road signs perfectly. Lucy is most likely ____ because images focus ____ her retina.`,
+    c:[`nearsighted; in front of`,`nearsighted; behind`,`farsighted; in front of`,`farsighted; behind`,`farsighted; directly on`],
+    a:"D", why:`Farsighted, image focuses behind the retina.`, tempt:`C, in front of is nearsighted.`, tags:["Near/farsightedness"] },
+  { s:2, t:"scenario", q:`Jin looks at a drawing that he sometimes sees as a white vase and sometimes as two black faces. Which Gestalt principle is Jin experiencing?`,
+    c:[`Closure`,`Figure-ground`,`Proximity`,`Similarity`,`Linear perspective`],
+    a:"B", why:`Vase vs faces = figure-ground.`, tempt:`A, nothing is incomplete.`, tags:["Gestalt"] },
+  { s:2, t:"scenario", q:`Mrs. Ortiz arranges her classroom desks in clusters of four, and students immediately see each cluster as a separate team. This illustrates the Gestalt principle of`,
+    c:[`similarity`,`closure`,`proximity`,`figure-ground`,`interposition`],
+    a:"C", why:`Grouped by nearness.`, tempt:`A, grouping is by location, not appearance.`, tags:["Gestalt"] },
+  { s:2, t:"scenario", q:`At halftime, Ava watches a marching band with players in red uniforms and players in white uniforms mixed together. She still sees the red players as one group and the white players as another. This is the principle of`,
+    c:[`similarity`,`proximity`,`closure`,`figure-ground`,`shape constancy`],
+    a:"A", why:`Grouped by same color.`, tempt:`B, they are mixed together, so not nearness.`, tags:["Gestalt"] },
+  { s:2, t:"except", q:`Which two of the following are binocular depth cues?`,
+    items:[`Retinal disparity`,`Interposition`,`Convergence`,`Relative clarity`],
+    c:[`1 + 2`,`1 + 3`,`2 + 4`,`3 + 4`,`2 + 3`],
+    a:"B", why:`Retinal disparity and convergence need two eyes.`, tempt:`E, interposition is monocular.`, tags:["Retinal disparity","Convergence"] },
+  { s:2, t:"scenario", q:`Keisha slowly brings her finger toward her nose and feels her eyes turn inward and strain. Her brain uses this muscle strain to judge distance, a cue called`,
+    c:[`retinal disparity`,`accommodation`,`interposition`,`convergence`,`linear perspective`],
+    a:"D", why:`Eyes turning inward = convergence.`, tempt:`B, accommodation is the lens.`, tags:["Convergence","Accommodation"] },
+  { s:2, t:"scenario", q:`Wearing 3D glasses, Troy sees a dinosaur leap off the screen because each eye receives a slightly different image. Which depth cue is the movie using?`,
+    c:[`Convergence`,`Relative clarity`,`Stroboscopic motion`,`Linear perspective`,`Retinal disparity`],
+    a:"E", why:`Two different images = retinal disparity.`, tempt:`A, convergence is muscle strain.`, tags:["Retinal disparity","Convergence"] },
+  { s:2, t:"scenario", q:`Dr. Bashir quickly flips through a stack of drawings, each slightly different, and the cartoon character appears to run. This is an example of`,
+    c:[`the phi phenomenon`,`the autokinetic effect`,`stroboscopic motion`,`closure`,`retinal disparity`],
+    a:"C", why:`Rapid still images = stroboscopic.`, tempt:`A, phi uses lights.`, tags:["Stroboscopic motion","Phi phenomenon"] },
+  { s:2, t:"scenario", q:`While camping, Maya stares at a single bright star in the black sky. It seems to drift slowly, even though it is not moving. Maya is experiencing`,
+    c:[`the phi phenomenon`,`stroboscopic motion`,`change blindness`,`sensory adaptation`,`the autokinetic effect`],
+    a:"E", why:`Single stationary light in darkness.`, tempt:`A, phi needs several lights.`, tags:["Autokinetic effect","Phi phenomenon"] },
+  { s:2, t:"data", q:`A researcher flashes a faint light 10 times at each intensity and records how many times Ben detects it. Based on the data, Ben's absolute threshold is`,
+    html:`<table class="mini"><thead><tr><th>Light intensity (units)</th><th>Times detected (out of 10)</th></tr></thead><tbody><tr><td>1</td><td>0</td></tr><tr><td>2</td><td>2</td></tr><tr><td>3</td><td>5</td></tr><tr><td>4</td><td>8</td></tr><tr><td>5</td><td>10</td></tr></tbody></table>`,
+    c:[`1 unit`,`2 units`,`3 units`,`4 units`,`5 units`],
+    a:"C", why:`Detected 5 of 10 times = 50%.`, tempt:`D, 80% is above threshold.`, tags:["Absolute threshold"] },
+  { s:2, t:"two-blank", q:`Relative clarity makes hazy objects seem ____, while interposition makes an object that is partly blocked seem ____.`,
+    c:[`closer; closer`,`farther; farther`,`closer; farther`,`farther; closer`,`larger; smaller`],
+    a:"B", why:`Both cues make the object seem farther.`, tempt:`D, the blocked object is the farther one.`, tags:["Monocular cues"] },
+  { s:2, t:"scenario", q:`Isabella expects her friend to text "Wanna hang out?" so she reads the typo-filled message "Wnna hng ot?" instantly. Isabella is using`,
+    c:[`top-down processing`,`bottom-up processing`,`transduction`,`sensory adaptation`,`figure-ground`],
+    a:"A", why:`Expectation fills in the message.`, tempt:`B, she is not building from raw letters.`, tags:["Bottom-up/top-down"] },
+  { s:2, t:"scenario", q:`After hearing stories all week that the old theater is haunted, Eli perceives the creaking stairs as footsteps. This is best explained by`,
+    c:[`a schema`,`context`,`sensory interaction`,`perceptual set`,`bottom-up processing`],
+    a:"D", why:`Expectation from stories = perceptual set.`, tempt:`A, a schema is a stored framework, not a primed expectation.`, tags:["Perceptual set","Schemas"] },
+  { s:2, t:"scenario", q:`A baby sees a rattle for the very first time and takes in its color, shape, and sound with no prior knowledge of what it is. The baby is using`,
+    c:[`top-down processing`,`a perceptual set`,`a schema`,`a context effect`,`bottom-up processing`],
+    a:"E", why:`No prior knowledge = bottom-up.`, tempt:`C, the baby has no schema for it yet.`, tags:["Bottom-up/top-down"] },
+  { s:2, t:"definition", q:`Which sequence shows the correct path of light through the eye?`,
+    c:[`Lens, cornea, pupil, retina`,`Retina, lens, pupil, cornea`,`Cornea, pupil, lens, retina`,`Pupil, cornea, retina, lens`,`Cornea, lens, retina, pupil`],
+    a:"C", why:`Cornea, pupil, lens, retina.`, tempt:`E skips the pupil.`, tags:["Lens","Retina"] },
+  { s:2, t:"scenario", q:`Tyler confuses red and green because he has only two working types of cones. Tyler has`,
+    c:[`monochromatism`,`dichromatism`,`prosopagnosia`,`blindsight`,`normal trichromatic vision`],
+    a:"B", why:`Two cone types = dichromatism.`, tempt:`A, monochromats see only gray.`, tags:["Dichromatism","Monochromatism"] },
+  { s:2, t:"except", q:`All of the following are true of rods EXCEPT`,
+    c:[`they work well in dim light`,`they detect black, white, and gray`,`they outnumber cones`,`they are concentrated in the fovea`,`they are important for peripheral vision`],
+    a:"D", why:`Cones, not rods, cluster in the fovea.`, tempt:`C, rods do outnumber cones (true).`, tags:["Rods","Fovea"] },
+  { s:2, t:"scenario", q:`The sound of a car horn reaches Gabe's right ear a split second before his left ear, so he turns to the right. Gabe is using`,
+    c:[`sound localization`,`place theory`,`frequency theory`,`the volley principle`,`sensory interaction`],
+    a:"A", why:`Comparing timing at each ear = localization.`, tempt:`B, place theory is about pitch.`, tags:["Sound localization"] },
+  { s:2, t:"scenario", q:`The smell of her grandmother's perfume instantly brings back a vivid, emotional memory for Hana. This most likely happens because smell`,
+    c:[`is processed in the occipital lobe`,`is relayed through the thalamus first`,`bypasses the thalamus and connects directly to brain areas for emotion and memory`,`is part of the vestibular sense`,`depends on gustatory cells`],
+    a:"C", why:`Smell skips the thalamus and reaches memory and emotion areas.`, tempt:`B, that is true of every sense EXCEPT smell.`, tags:["Thalamus"] },
+  { s:2, t:"data", q:`A student measures how much weight must be added before she notices a difference. According to Weber's Law, the missing value is`,
+    html:`<table class="mini"><thead><tr><th>Starting weight (oz)</th><th>Added weight needed to notice (oz)</th></tr></thead><tbody><tr><td>10</td><td>1</td></tr><tr><td>20</td><td>2</td></tr><tr><td>50</td><td>5</td></tr><tr><td>100</td><td>?</td></tr></tbody></table>`,
+    c:[`1 ounce`,`5 ounces`,`20 ounces`,`50 ounces`,`10 ounces`],
+    a:"E", why:`Constant 10%, so 10 oz.`, tempt:`A, the change is a proportion, not a fixed 1 oz.`, tags:["Weber's Law"] },
+  { s:2, t:"two-blank", q:`Conduction deafness involves damage to the ____, while sensorineural deafness involves damage to the ____.`,
+    c:[`hair cells; eardrum`,`auditory nerve; middle ear bones`,`cochlea; middle ear bones`,`eardrum or middle ear bones; hair cells or auditory nerve`,`temporal lobe; occipital lobe`],
+    a:"D", why:`Conduction = mechanical parts. Sensorineural = hair cells or nerve.`, tempt:`A is reversed.`, tags:["Conduction deafness","Sensorineural deafness"] },
+  { s:2, t:"scenario", q:`While concentrating on a video game, Liam does not hear his mother say "Dinner's ready." This is the best example of`,
+    c:[`sensory adaptation`,`selective attention`,`inattentional blindness`,`change blindness`,`the cocktail party effect`],
+    a:"B", why:`Focused on the game, tuning out other sounds.`, tempt:`E, the cocktail party effect is when something (like your name) breaks through.`, tags:["Selective attention","Cocktail party effect"] },
+  { s:2, t:"scenario", q:`In a study, a man asking a student for directions is secretly swapped with a different man while two workers carry a door between them. About half the students never notice. This demonstrates`,
+    c:[`change blindness`,`inattentional blindness`,`selective attention`,`perceptual set`,`prosopagnosia`],
+    a:"A", why:`The person changed and wasn't noticed.`, tempt:`B, inattentional blindness is missing something that was there, not something that changed.`, tags:["Change blindness","Inattentional blindness"] },
+  { s:2, t:"except", q:`Each of the following is one of the basic tastes EXCEPT`,
+    c:[`umami`,`oleogustus`,`spicy`,`sour`,`bitter`],
+    a:"C", why:`Spicy is pain, not a taste.`, tempt:`B, oleogustus (fat) is a real taste.`, tags:["Six tastes"] },
+  { s:2, t:"except", q:`Which two of the following describe opponent-process theory?`,
+    items:[`Colors are processed in pairs: red-green, blue-yellow, black-white.`,`The retina has three kinds of cones.`,`It explains afterimages.`,`It explains how a TV makes all colors from red, green, and blue pixels.`],
+    c:[`1 + 2`,`2 + 4`,`3 + 4`,`2 + 3`,`1 + 3`],
+    a:"E", why:`Pairs of colors and afterimages.`, tempt:`A, statement 2 is trichromatic.`, tags:["Opponent-process","Trichromatic"] },
+  { s:2, t:"scenario", q:`Even in the dim orange light of sunset, Abby still sees her red backpack as red. This is`,
+    c:[`lightness constancy`,`size constancy`,`shape constancy`,`color constancy`,`opponent-process theory`],
+    a:"D", why:`Color stays the same under different light.`, tempt:`A, lightness constancy is about brightness (white vs gray).`, tags:["Perceptual constancy"] },
+  { s:2, t:"scenario", q:`As Rafael opens his bedroom door, its image on his retina becomes a trapezoid, but he still sees the door as a rectangle. This is`,
+    c:[`size constancy`,`shape constancy`,`linear perspective`,`closure`,`relative size`],
+    a:"B", why:`Shape stays the same.`, tempt:`A, size did not matter.`, tags:["Perceptual constancy"] },
+  { s:2, t:"two-blank", q:`When warm and cold receptors on Noah's hand are stimulated at the same time, he feels ____. This shows that ____.`,
+    c:[`cold; the body has special cold-only receptors`,`pain; the pain gate is closed`,`numb; sensory adaptation has occurred`,`warm; kinesthesis controls temperature`,`hot; the sensation of hot comes from both receptors firing together`],
+    a:"E", why:`Warm + cold at once = hot.`, tempt:`B, no pain receptors are involved.`, tags:["Hot sensation"] },
+  { s:2, t:"definition", q:`Perceptual constancy refers to`,
+    c:[`perceiving objects as unchanging even as lighting and retinal images change`,`diminished sensitivity to a constant stimulus`,`the tendency to group nearby objects together`,`a mental predisposition to perceive what we expect`,`perceiving motion where none exists`],
+    a:"A", why:`Definition of constancy.`, tempt:`B is sensory adaptation.`, tags:["Perceptual constancy"] },
+  { s:2, t:"scenario", q:`Oscar reads the same symbol as the letter B in "A, B, C" and as the number 13 in "12, 13, 14." This shows the effect of`,
+    c:[`context`,`perceptual set`,`schema`,`closure`,`sensory interaction`],
+    a:"A", why:`Surrounding letters or numbers change the meaning.`, tempt:`B, no one told him what to expect.`, tags:["Context","Perceptual set"] },
+
+  // ===== SECTION 3 =====
+  { s:3, t:"two-blank", q:`Sara no longer notices the perfume in her room after 10 minutes, even though her friend who just walked in says it is strong. Sara is experiencing ____, which happens because ____.`,
+    c:[`sensory adaptation; her receptors fire less often to an unchanging stimulus`,`selective attention; her brain chooses to focus on the perfume`,`sensory interaction; her sense of taste is changing her sense of smell`,`Weber's Law; the scent increased by a constant proportion`,`transduction; her receptors stopped converting energy forever`],
+    a:"A", why:`Adaptation: receptors fire less.`, tempt:`B, adaptation is automatic, not a choice.`, tags:["Sensory adaptation"] },
+  { s:3, t:"scenario", q:`Micah notices when one candle is added to a room lit by 10 candles, but not when one candle is added to a room lit by 100 candles. Which best explains this?`,
+    c:[`The absolute threshold`,`Weber's Law`,`Sensory adaptation`,`The just-noticeable difference is always exactly one candle`,`Transduction`],
+    a:"B", why:`Change needed depends on a percentage.`, tempt:`A, both rooms are well above the absolute threshold.`, tags:["Weber's Law","JND"] },
+  { s:3, t:"scenario", q:`In a movie scene, an actor's coffee cup is full in one shot and empty in the next, yet most viewers never notice. This is`,
+    c:[`inattentional blindness`,`selective attention`,`change blindness`,`perceptual set`,`the cocktail party effect`],
+    a:"C", why:`The cup changed between shots.`, tempt:`A, nothing was hidden in plain view; something changed.`, tags:["Change blindness","Inattentional blindness"] },
+  { s:3, t:"two-blank", q:`Ganglion cells ____, and the spot where their axons leave the eye is the ____.`,
+    c:[`form the optic nerve; fovea`,`detect color; blind spot`,`detect dim light; fovea`,`form the optic nerve; blind spot`,`change the shape of the lens; retina`],
+    a:"D", why:`Ganglion axons form the optic nerve and exit at the blind spot.`, tempt:`A, the fovea is the sharpest point, not the exit.`, tags:["Ganglion cells","Blind spot"] },
+  { s:3, t:"except", q:`All of the following are examples of top-down processing EXCEPT`,
+    c:[`reading a sloppy note from a friend whose handwriting you know`,`hearing the lyrics you expect in a mumbled song`,`seeing a monster in the clouds after watching a scary movie`,`filling in the missing letters of a familiar word`,`a newborn reacting to the brightness of a light she has never seen before`],
+    a:"E", why:`The newborn has no experience, so bottom-up.`, tempt:`C, being primed by a movie is top-down.`, tags:["Bottom-up/top-down"] },
+  { s:3, t:"scenario", q:`Ms. Rivera tells one class they will see a picture of a young woman and tells another class they will see an old woman. She shows both classes the same ambiguous drawing, and each class sees what it was told. This demonstrates`,
+    c:[`perceptual set`,`figure-ground`,`closure`,`bottom-up processing`,`sensory adaptation`],
+    a:"A", why:`What they were told set their expectation.`, tempt:`B, the drawing is ambiguous, but the instruction caused the difference.`, tags:["Perceptual set"] },
+  { s:3, t:"two-blank", q:`Nia judges that a hazy ship is far out at sea using ____, and that a building partly hidden behind another building is farther away using ____.`,
+    c:[`relative size; linear perspective`,`relative clarity; interposition`,`texture gradient; convergence`,`relative clarity; relative size`,`retinal disparity; interposition`],
+    a:"B", why:`Hazy = clarity. Blocked = interposition.`, tempt:`D, relative size is about smaller images.`, tags:["Monocular cues"] },
+  { s:3, t:"except", q:`Which two of the following are examples of apparent motion?`,
+    items:[`A flipbook cartoon`,`A car driving past your house`,`A row of lights blinking one after another`,`A real bird flying overhead`],
+    c:[`1 + 2`,`2 + 4`,`1 + 3`,`3 + 4`,`1 + 4`],
+    a:"C", why:`Flipbook (stroboscopic) and blinking lights (phi).`, tempt:`A, a car really moves.`, tags:["Stroboscopic motion","Phi phenomenon"] },
+  { s:3, t:"scenario", q:`Dr. Kim's patient has no working cones. He sees the world only in shades of gray but has no trouble seeing at night. The patient has`,
+    c:[`dichromatism`,`prosopagnosia`,`blindsight`,`nearsightedness`,`monochromatism`],
+    a:"E", why:`No cones, all gray = monochromatism.`, tempt:`A, dichromats still see some color.`, tags:["Monochromatism","Dichromatism"] },
+  { s:3, t:"data", q:`A researcher plots the age of 50 adults against the number of taste buds each has. Which conclusion is best supported?`,
+    html:`<pre class="art">Taste buds
+   High |  x  x
+        |     x  x
+        |        x  x  x
+        |           x  x  x
+    Low |                 x  x
+        +------------------------
+          20   40   60   80   Age (years)</pre>`,
+    c:[`There is a positive correlation: older adults have more taste buds.`,`There is no correlation between age and taste buds.`,`Aging causes taste buds to die.`,`There is a negative correlation: as age increases, taste buds tend to decrease.`,`Older adults are more likely to be supertasters.`],
+    a:"D", why:`Downward slope = negative correlation.`, tempt:`C, correlation cannot prove causation.`, tags:["Taste receptors"] },
+  { s:3, t:"two-blank", q:`The volley principle adds to ____ theory by stating that ____.`,
+    c:[`place; hair cells at different locations respond to different pitches`,`frequency; a single neuron can fire faster than 1,000 times per second`,`frequency; groups of neurons take turns firing so together they can signal higher frequencies`,`gate-control; large fibers close the pain gate`,`opponent-process; colors are processed in pairs`],
+    a:"C", why:`Neurons take turns (volley).`, tempt:`B, single neurons cannot fire that fast, which is why volley is needed.`, tags:["Frequency theory"] },
+  { s:3, t:"scenario", q:`A football player dislocates his finger in the first quarter but does not feel much pain until the game ends. This is best explained by`,
+    c:[`phantom limb syndrome`,`gate-control theory`,`sensory adaptation`,`kinesthesis`,`pheromones`],
+    a:"B", why:`Brain focus closes the pain gate.`, tempt:`C, pain was blocked, not adapted to.`, tags:["Gate-control"] },
+  { s:3, t:"scenario", q:`Which is the BEST example of sensory interaction rather than synesthesia?`,
+    c:[`Paula hears a different word when she watches the speaker's lips than when she closes her eyes.`,`Jay sees colors whenever he hears music.`,`Lin says the word "Monday" tastes like pickles.`,`Noor always sees the number 7 as green.`,`Ravi sees shapes when he smells coffee.`],
+    a:"A", why:`Vision changed what she hears (normal interaction).`, tempt:`E is synesthesia (smell triggers shapes).`, tags:["Sensory interaction","Synesthesia"] },
+  { s:3, t:"two-blank", q:`Cones are concentrated in the ____ and work best in ____ light.`,
+    c:[`fovea; dim`,`blind spot; bright`,`periphery; dim`,`fovea; bright`,`periphery; bright`],
+    a:"D", why:`Fovea and bright light.`, tempt:`A, dim light is rods.`, tags:["Cones","Fovea"] },
+  { s:3, t:"except", q:`All of the following are true of the vestibular sense EXCEPT`,
+    c:[`its receptors are in the inner ear`,`the semicircular canals contain moving fluid`,`it detects head position and balance`,`it can cause dizziness after spinning`,`it relies on receptors in the muscles, tendons, and joints`],
+    a:"E", why:`Muscles, tendons, joints = kinesthesis.`, tempt:`B, fluid in the canals is true.`, tags:["Vestibular sense","Kinesthesis"] },
+  { s:3, t:"scenario", q:`Trevor sits in a pitch-dark room and stares at a single small light that never moves. When asked, he reports that the light moved about five inches. Trevor experienced`,
+    c:[`the phi phenomenon`,`stroboscopic motion`,`the autokinetic effect`,`perceptual set`,`sensory adaptation`],
+    a:"C", why:`Single light in the dark seems to move.`, tempt:`A, phi needs multiple lights.`, tags:["Autokinetic effect"] },
+  { s:3, t:"two-blank", q:`Bottom-up processing starts with ____, while top-down processing starts with ____.`,
+    c:[`expectations; sensory receptors`,`sensory receptors; expectations and experience`,`schemas; transduction`,`the brain; the eyes`,`context; raw data`],
+    a:"B", why:`Receptors first vs expectations first.`, tempt:`A is reversed.`, tags:["Bottom-up/top-down"] },
+  { s:3, t:"two-blank", q:`During a flip, a gymnast knows her legs are straight without looking, and she keeps her balance when she lands. These abilities come from ____ and the ____, respectively.`,
+    c:[`the vestibular sense; kinesthesis`,`kinesthesis; gate control`,`convergence; kinesthesis`,`kinesthesis; vestibular sense`,`the vestibular sense; retinal disparity`],
+    a:"D", why:`Leg position = kinesthesis. Balance = vestibular.`, tempt:`A is reversed.`, tags:["Kinesthesis","Vestibular sense"] },
+  { s:3, t:"scenario", q:`After ten years of reading X-rays, Dr. Patel instantly spots a tiny fracture that a first-year student misses. Dr. Patel is most likely using`,
+    c:[`top-down processing guided by her schemas`,`bottom-up processing`,`sensory adaptation`,`change blindness`,`the absolute threshold`],
+    a:"A", why:`Experience and schemas guide what she sees.`, tempt:`B, the student with less knowledge relies more on bottom-up.`, tags:["Bottom-up/top-down","Schemas"] },
+  { s:3, t:"two-blank", q:`Sophie watches a movie made of 24 still frames per second and sees smooth motion. Her brother watches the two lights on a railroad crossing flash back and forth and sees one light bouncing between them. Sophie experiences ____, and her brother experiences ____.`,
+    c:[`the phi phenomenon; stroboscopic motion`,`the autokinetic effect; the phi phenomenon`,`stroboscopic motion; the autokinetic effect`,`the phi phenomenon; the autokinetic effect`,`stroboscopic motion; the phi phenomenon`],
+    a:"E", why:`Frames = stroboscopic. Flashing lights = phi.`, tempt:`A is reversed.`, tags:["Stroboscopic motion","Phi phenomenon"] },
+  { s:3, t:"except", q:`Which two of the following are true of the thalamus?`,
+    items:[`It relays visual information to the cortex.`,`It relays smell information to the cortex.`,`It acts as the brain's sensory switchboard.`,`It is located in the occipital lobe.`],
+    c:[`1 + 2`,`1 + 3`,`2 + 4`,`3 + 4`,`2 + 3`],
+    a:"B", why:`Relays vision and acts as the switchboard.`, tempt:`A, smell skips the thalamus.`, tags:["Thalamus"] },
+  { s:3, t:"scenario", q:`Tina is nearsighted. Which best explains why distant road signs look blurry to her?`,
+    c:[`Her lens focuses the image in front of her retina.`,`Her lens focuses the image behind her retina.`,`The image falls on her blind spot.`,`Her rods are not working.`,`Her ganglion cells are damaged.`],
+    a:"A", why:`Nearsighted: image focuses in front of the retina.`, tempt:`B is farsighted.`, tags:["Near/farsightedness"] },
+  { s:3, t:"scenario", q:`A scientist discovers three types of cones in the retina, each most sensitive to short, medium, or long wavelengths. This finding supports`,
+    c:[`opponent-process theory`,`place theory`,`trichromatic theory`,`frequency theory`,`gate-control theory`],
+    a:"C", why:`Three cone types = trichromatic.`, tempt:`A, opponent-process is about pairs after the retina.`, tags:["Trichromatic"] },
+  { s:3, t:"two-blank", q:`Blue light has ____ wavelengths, and red light has ____ wavelengths.`,
+    c:[`long; short`,`medium; long`,`short; medium`,`short; long`,`medium; short`],
+    a:"D", why:`Blue short, red long.`, tempt:`A is reversed.`, tags:["Light wavelengths"] },
+  { s:3, t:"except", q:`All of the following are Gestalt grouping principles EXCEPT`,
+    c:[`closure`,`proximity`,`similarity`,`figure-ground`,`perceptual set`],
+    a:"E", why:`Perceptual set is about expectations, not grouping.`, tempt:`D, figure-ground is a Gestalt principle.`, tags:["Gestalt","Perceptual set"] },
+
+  // ===== SECTION 4 =====
+  { s:4, t:"data", q:`Five students time how many seconds pass before they stop noticing a scented candle: 20, 30, 30, 40, 80. Which statement is correct?`,
+    c:[`The mean is 30 and the median is 40.`,`The mean is 40 and the median is 30.`,`The mean is 40 and the median is 40.`,`The mean is 30 and the mode is 40.`,`The mode is 80 and the median is 30.`],
+    a:"B", why:`Mean 200/5 = 40, median = 30.`, tempt:`A switches mean and median.`, tags:["Sensory adaptation"] },
+  { s:4, t:"definition", q:`Transduction is best defined as`,
+    c:[`organizing and interpreting sensory information`,`the minimum stimulation needed to detect a stimulus`,`converting one form of energy into neural impulses`,`the lens changing shape to focus`,`diminished sensitivity to a constant stimulus`],
+    a:"C", why:`Energy into neural impulses.`, tempt:`A is perception.`, tags:["Transduction"] },
+  { s:4, t:"scenario", q:`Dev is hit hard on the back of his head during a football game and afterward sees flashes of light. Which part of the brain was most likely affected?`,
+    c:[`Occipital lobe`,`Temporal lobe`,`Frontal lobe`,`Parietal lobe`,`Olfactory bulb`],
+    a:"A", why:`Back of the head = occipital, visual cortex.`, tempt:`B, temporal is hearing.`, tags:["Occipital lobes"] },
+  { s:4, t:"scenario", q:`A driver who is texting fails to see a pedestrian who is clearly visible in the crosswalk. This is best described as`,
+    c:[`change blindness`,`selective attention`,`sensory adaptation`,`inattentional blindness`,`the cocktail party effect`],
+    a:"D", why:`Visible pedestrian missed because attention was on the phone.`, tempt:`A, nothing changed.`, tags:["Inattentional blindness","Change blindness"] },
+  { s:4, t:"except", q:`Which two of the following are examples of perceptual constancy?`,
+    items:[`A white shirt still looks white in the shade.`,`Railroad tracks seem to meet in the distance.`,`A door still looks rectangular as it swings open.`,`A hazy mountain seems farther away.`],
+    c:[`1 + 2`,`2 + 4`,`3 + 4`,`2 + 3`,`1 + 3`],
+    a:"E", why:`White shirt (lightness) and door (shape).`, tempt:`D, railroad tracks are linear perspective.`, tags:["Perceptual constancy","Linear perspective"] },
+  { s:4, t:"two-blank", q:`As Leo looks down to read, his lenses thicken and his eyes turn slightly inward. These two processes are ____ and ____, respectively.`,
+    c:[`convergence; accommodation`,`accommodation; convergence`,`retinal disparity; convergence`,`accommodation; retinal disparity`,`transduction; convergence`],
+    a:"B", why:`Lens thickens (accommodation), eyes turn in (convergence).`, tempt:`A is reversed.`, tags:["Accommodation","Convergence"] },
+  { s:4, t:"definition", q:`The fovea is`,
+    c:[`the point where the optic nerve leaves the eye`,`the transparent structure that changes shape to focus light`,`the layer of neurons whose axons form the optic nerve`,`the retina's central focal point, where cones cluster`,`the colored muscle that controls the pupil`],
+    a:"D", why:`Central point, packed with cones.`, tempt:`A is the blind spot.`, tags:["Fovea","Blind spot"] },
+  { s:4, t:"scenario", q:`A soda company wants to reduce the sugar in its drink without customers noticing. The reduction must stay below the`,
+    c:[`absolute threshold`,`level of sensory adaptation`,`point of transduction`,`perceptual set`,`just-noticeable difference`],
+    a:"E", why:`A change people can't notice is below the JND.`, tempt:`A, the drink still has sugar people can detect.`, tags:["JND","Absolute threshold"] },
+  { s:4, t:"scenario", q:`Chef Marco adds parmesan cheese and mushroom broth to give his sauce a rich, savory flavor. He is targeting which taste?`,
+    c:[`Umami`,`Oleogustus`,`Sour`,`Sweet`,`Bitter`],
+    a:"A", why:`Savory = umami.`, tempt:`B, oleogustus is fat.`, tags:["Six tastes"] },
+  { s:4, t:"scenario", q:`A patient's injury prevents sensory signals from reaching the thalamus. Which sense would be LEAST affected?`,
+    c:[`Vision`,`Hearing`,`Smell`,`Taste`,`Touch`],
+    a:"C", why:`Smell does not relay through the thalamus.`, tempt:`D, taste does go through the thalamus.`, tags:["Thalamus"] },
+
+  // ===== BONUS (quiz pool only; Round 1 from chat) =====
+  { s:5, t:"scenario", q:`Coach Dana tells her team a sports drink is "new and improved." The recipe is unchanged, but players swear it tastes sweeter. This is best explained by`,
+    c:[`perceptual set`,`sensory adaptation`,`Weber's Law`,`sensory interaction`,`bottom-up processing`],
+    a:"A", why:`Being told it is "new and improved" set their expectation.`, tempt:`D, sensory interaction is one sense affecting another; here it is an expectation.`, tags:["Perceptual set"] },
+  { s:5, t:"scenario", q:`Rodrigo hears a whisper from across the room only half the time. That volume is his`,
+    c:[`just-noticeable difference`,`absolute threshold`,`Weber's constant`,`sensory adaptation`,`transduction`],
+    a:"B", why:`Detected half the time = absolute threshold.`, tempt:`A, JND compares two stimuli.`, tags:["Absolute threshold","JND"] },
+  { s:5, t:"scenario", q:`Lena's grandfather gets a cochlear implant after age damaged the hair cells in his cochlea. He had`,
+    c:[`conduction deafness`,`a sound localization problem`,`sensorineural deafness`,`place deafness`,`prosopagnosia`],
+    a:"C", why:`Hair cell damage = sensorineural.`, tempt:`A, conduction is eardrum or bones.`, tags:["Sensorineural deafness","Conduction deafness"] },
+  { s:5, t:"two-blank", q:`Omar stares at a blue square, then looks at a white wall and sees a ____ afterimage, which supports ____ theory.`,
+    c:[`blue; trichromatic`,`yellow; trichromatic`,`red; opponent-process`,`yellow; opponent-process`,`green; opponent-process`],
+    a:"D", why:`Blue's opponent is yellow; afterimages support opponent-process.`, tempt:`B, trichromatic cannot explain afterimages.`, tags:["Afterimages","Opponent-process"] },
+  { s:5, t:"two-blank", q:`With her eyes closed, Tia touches her ear while standing on one foot without falling. Touching her ear relies on ____, and staying upright relies on ____.`,
+    c:[`the vestibular sense; kinesthesis`,`convergence; the vestibular sense`,`kinesthesis; gate control`,`the vestibular sense; transduction`,`kinesthesis; the vestibular sense`],
+    a:"E", why:`Body-part position = kinesthesis; balance = vestibular.`, tempt:`A is reversed.`, tags:["Kinesthesis","Vestibular sense"] },
+  { s:5, t:"except", q:`All of the following are monocular depth cues EXCEPT`,
+    c:[`relative size`,`retinal disparity`,`interposition`,`relative clarity`,`texture gradient`],
+    a:"B", why:`Retinal disparity needs both eyes.`, tempt:`E, texture gradient is monocular.`, tags:["Retinal disparity","Monocular cues"] },
+  { s:5, t:"scenario", q:`Mr. Chen shows a video in which an actress's shirt changes color between camera cuts. Few students notice. This is`,
+    c:[`inattentional blindness`,`selective attention`,`the cocktail party effect`,`change blindness`,`perceptual set`],
+    a:"D", why:`The shirt changed between cuts.`, tempt:`A, nothing was hidden in plain view.`, tags:["Change blindness","Inattentional blindness"] },
+  { s:5, t:"scenario", q:`Nadia looks down a long tiled hallway. Nearby tiles look large and spread out, while faraway tiles look tiny and crowded. She is using`,
+    c:[`linear perspective`,`relative size`,`texture gradient`,`interposition`,`relative clarity`],
+    a:"C", why:`A surface whose texture gets finer and more crowded = texture gradient.`, tempt:`B, relative size compares separate objects, not a continuous surface.`, tags:["Texture gradient","Monocular cues"] },
+  { s:5, t:"except", q:`Which two of the following are true of cones?`,
+    items:[`They detect color.`,`They work best in dim light.`,`They are concentrated in the fovea.`,`They outnumber rods.`],
+    c:[`1 + 3`,`2 + 4`,`3 + 4`,`1 + 2`,`2 + 3`],
+    a:"A", why:`Cones detect color and cluster in the fovea.`, tempt:`D, statement 2 describes rods.`, tags:["Cones","Rods"] },
+  { s:5, t:"scenario", q:`Customers don't notice when a $4.00 muffin goes up to $4.10, but they do notice when it goes up to $4.50. The smallest price change customers can notice is the`,
+    c:[`absolute threshold`,`sensory adaptation point`,`transduction point`,`perceptual set`,`just-noticeable difference`],
+    a:"E", why:`Smallest noticeable change = JND.`, tempt:`A, absolute threshold is detecting a stimulus at all.`, tags:["JND","Absolute threshold"] }
+];
+
+// Number test questions 1-105, bonus as B1-B10
+(function () {
+  let n = 0, b = 0;
+  QUESTIONS.forEach(q => { q.id = q.s === 5 ? "B" + (++b) : String(++n); });
+})();
+
+(function () {
+  "use strict";
+
+  // ---------- helpers ----------
+  const $ = (s, root = document) => root.querySelector(s);
+  const $$ = (s, root = document) => Array.from(root.querySelectorAll(s));
+  const LETTERS = ["A", "B", "C", "D", "E"];
+  const TYPE_LABEL = { scenario: "Scenario", "two-blank": "Two-blank", except: "EXCEPT / Which two", definition: "Definition", data: "Data" };
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem("sp_" + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem("sp_" + k, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } }
+  };
+  const stripTags = s => String(s).replace(/<[^>]*>/g, " ");
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+  // ---------- theme ----------
+  const savedTheme = store.get("theme", null);
+  if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+  $("#themeToggle").addEventListener("click", () => {
+    const sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const cur = document.documentElement.dataset.theme || (sysDark ? "dark" : "light");
+    const next = cur === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    store.set("theme", next);
+  });
+
+  // keep sticky toolbars below the header
+  function setTopOffset() {
+    document.documentElement.style.setProperty("--top", $(".topbar").offsetHeight + "px");
+  }
+  window.addEventListener("resize", setTopOffset);
+  setTopOffset();
+
+  // ---------- tabs ----------
+  const VIEWS = ["guide", "test", "quiz", "cheat"];
+  function showView(v) {
+    if (!VIEWS.includes(v)) v = "guide";
+    $$(".tab").forEach(t => t.classList.toggle("active", t.dataset.view === v));
+    $$(".view").forEach(s => s.classList.toggle("active", s.id === "view-" + v));
+    if (location.hash.slice(1) !== v) history.replaceState(null, "", "#" + v);
+    window.scrollTo(0, 0);
+  }
+  $$(".tab").forEach(t => t.addEventListener("click", () => showView(t.dataset.view)));
+  window.addEventListener("hashchange", () => showView(location.hash.slice(1)));
+
+  // =====================================================
+  // STUDY GUIDE
+  // =====================================================
+  let activeGroup = "all";
+  const chipWrap = $("#groupChips");
+  [{ id: "all", name: "All" }].concat(GROUPS).forEach(g => {
+    const b = document.createElement("button");
+    b.className = "chip" + (g.id === "all" ? " active" : "");
+    b.textContent = g.range ? `${g.name} (${g.range})` : g.name;
+    b.dataset.group = g.id;
+    b.addEventListener("click", () => {
+      activeGroup = g.id;
+      $$(".chip", chipWrap).forEach(c => c.classList.toggle("active", c === b));
+      renderGuide();
+    });
+    chipWrap.appendChild(b);
+  });
+
+  function diagramsHtml() {
+    return MONO_DIAGRAMS.map(d =>
+      `<div class="diagram"><h4>${esc(d.name)}</h4><div class="small">${esc(d.how)}</div><pre class="art">${esc(d.art)}</pre></div>`
+    ).join("");
+  }
+
+  function termHtml(t, query) {
+    let name = esc(t.name);
+    if (query) {
+      const i = t.name.toLowerCase().indexOf(query);
+      if (i >= 0) name = esc(t.name.slice(0, i)) + "<mark>" + esc(t.name.slice(i, i + query.length)) + "</mark>" + esc(t.name.slice(i + query.length));
+    }
+    return `<article class="term" data-n="${esc(t.n)}">
+      <div class="term-head"><span class="term-num">${esc(t.n)}</span><span class="term-name">${name}</span></div>
+      <div class="term-body">
+        <p class="field">${t.def}</p>
+        ${t.extra || ""}
+        ${t.diagrams ? diagramsHtml() : ""}
+        <p class="field"><b class="lbl">Example</b>${t.ex}</p>
+        <p class="field"><b class="lbl">Trick</b>${t.trick}</p>
+        <p class="field"><b class="lbl">Clue words</b>${t.clues}</p>
+      </div>
+    </article>`;
+  }
+
+  function confusedHtml(gid) {
+    const rows = CONFUSED[gid] || [];
+    if (!rows.length) return "";
+    return `<div class="confused"><h3>Commonly confused</h3><div class="table-wrap"><table>
+      <thead><tr><th>Pair</th><th>How to tell them apart</th><th>Scenario keyword</th></tr></thead>
+      <tbody>${rows.map(r => `<tr><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join("")}</tbody>
+    </table></div></div>`;
+  }
+
+  function renderGuide() {
+    const query = $("#termSearch").value.trim().toLowerCase();
+    const out = [];
+    GROUPS.forEach(g => {
+      if (activeGroup !== "all" && activeGroup !== g.id) return;
+      const terms = TERMS.filter(t => t.g === g.id).filter(t => {
+        if (!query) return true;
+        const hay = [t.name, stripTags(t.def), t.ex, t.trick, t.clues, stripTags(t.extra || "")].join(" ").toLowerCase();
+        return hay.includes(query);
+      });
+      if (!terms.length) return;
+      out.push(`<div class="group-head"><h2>${esc(g.name)}</h2><span class="muted">terms ${esc(g.range)}</span></div>`);
+      if (g.intro && !query) out.push(`<div class="group-intro">${g.intro}</div>`);
+      terms.forEach(t => out.push(termHtml(t, query)));
+      if (!query) out.push(confusedHtml(g.id));
+    });
+    $("#guideContent").innerHTML = out.length ? out.join("") : `<p class="empty">No terms match "${esc(query)}".</p>`;
+  }
+
+  $("#termSearch").addEventListener("input", renderGuide);
+  $("#flashMode").addEventListener("change", e => {
+    $("#guideContent").classList.toggle("flash", e.target.checked);
+    $$(".term.revealed").forEach(t => t.classList.remove("revealed"));
+  });
+  $("#guideContent").addEventListener("click", e => {
+    if (!$("#guideContent").classList.contains("flash")) return;
+    const card = e.target.closest(".term");
+    if (card) card.classList.toggle("revealed");
+  });
+
+  // =====================================================
+  // SHARED QUESTION RENDERING + TERM STATS
+  // =====================================================
+  let tagStats = store.get("tagStats", {}); // tag -> {miss, right}
+
+  function recordResult(q, correct) {
+    q.tags.forEach(tag => {
+      if (!tagStats[tag]) tagStats[tag] = { miss: 0, right: 0 };
+      if (correct) tagStats[tag].right++; else tagStats[tag].miss++;
+    });
+    store.set("tagStats", tagStats);
+    renderMissList();
+  }
+
+  function questionEl(q, ctx, label, selected, reveal) {
+    const el = document.createElement("div");
+    el.className = "q" + (reveal ? " locked" : "");
+    el.id = `${ctx}-${q.id}`;
+    const items = q.items ? `<ol class="q-items">${q.items.map(i => `<li>${i}</li>`).join("")}</ol>` : "";
+    const choices = q.c.map((text, i) => {
+      const L = LETTERS[i];
+      let cls = "choice";
+      if (selected === L) cls += " selected";
+      if (reveal) {
+        if (L === q.a) cls += " correct";
+        else if (selected === L) cls += " wrong";
+      }
+      return `<label class="${cls}">
+        <input type="radio" name="${ctx}-${q.id}" value="${L}" ${selected === L ? "checked" : ""} ${reveal ? "disabled" : ""}>
+        <span class="letter">(${L})</span><span>${text}</span>
+      </label>`;
+    }).join("");
+    let fb = "";
+    if (reveal) {
+      const ok = selected === q.a;
+      const tempt = `<br><b>Most tempting wrong answer:</b> ${q.tempt}`;
+      fb = `<div class="feedback ${ok ? "good" : "bad"}">
+        ${ok ? "<b>Correct.</b> " : `<b>${selected ? "Incorrect" : "Not answered"}.</b> The answer is <b>${q.a}</b>. `}${q.why}${tempt}
+        <div class="tags">Terms: ${q.tags.map(esc).join(", ")}</div>
+      </div>`;
+    }
+    el.innerHTML = `<div class="q-top"><span class="q-num">${label}</span><span class="q-type">${TYPE_LABEL[q.t] || q.t}</span></div>
+      <div class="q-stem">${q.q}</div>${q.html || ""}${items}
+      <div class="choices">${choices}</div>${fb}`;
+    return el;
+  }
+
+  // =====================================================
+  // PRACTICE TEST
+  // =====================================================
+  const TEST = QUESTIONS.filter(q => q.s <= 4);
+  const byId = Object.fromEntries(QUESTIONS.map(q => [q.id, q]));
+  let testAnswers = store.get("testAnswers", {});
+  let testRevealed = store.get("testRevealed", {}); // id -> true (checked in instant mode or after submit)
+  let testGraded = store.get("testGraded", false);
+  let onlyMissed = false;
+  $("#instantCheck").checked = store.get("instant", false);
+
+  function renderTest() {
+    const sec = $("#sectionFilter").value;
+    const wrap = $("#testContent");
+    wrap.innerHTML = "";
+    let lastSection = null;
+    TEST.forEach(q => {
+      if (sec !== "all" && String(q.s) !== sec) return;
+      const reveal = testGraded || !!testRevealed[q.id];
+      if (onlyMissed && (!reveal || testAnswers[q.id] === q.a)) return;
+      if (q.s !== lastSection) {
+        const h = document.createElement("h3");
+        h.className = "section-title";
+        h.textContent = SECTIONS[q.s];
+        wrap.appendChild(h);
+        lastSection = q.s;
+      }
+      wrap.appendChild(questionEl(q, "t", q.id + ".", testAnswers[q.id], reveal));
+    });
+    if (!wrap.children.length) wrap.innerHTML = `<p class="empty">Nothing to show here.</p>`;
+    updateTestProgress();
+    $("#onlyMissed").classList.toggle("hidden", !testGraded);
+    $("#onlyMissed").textContent = onlyMissed ? "Show all questions" : "Show only missed";
+    $("#submitTest").classList.toggle("hidden", testGraded);
+  }
+
+  function updateTestProgress() {
+    const n = TEST.filter(q => testAnswers[q.id]).length;
+    $("#testBar").style.width = (n / TEST.length * 100) + "%";
+    $("#testProgressText").textContent = `${n} / ${TEST.length} answered`;
+  }
+
+  $("#testContent").addEventListener("change", e => {
+    if (e.target.type !== "radio") return;
+    const id = e.target.name.slice(2);
+    if (testGraded || testRevealed[id]) return;
+    testAnswers[id] = e.target.value;
+    store.set("testAnswers", testAnswers);
+    const q = byId[id];
+    const reveal = $("#instantCheck").checked;
+    if (reveal) {
+      testRevealed[id] = true;
+      store.set("testRevealed", testRevealed);
+      recordResult(q, testAnswers[id] === q.a);
+    }
+    const old = $("#t-" + id);
+    old.replaceWith(questionEl(q, "t", q.id + ".", testAnswers[id], reveal));
+    updateTestProgress();
+  });
+
+  function scoreSummary(list, answers) {
+    const correct = list.filter(q => answers[q.id] === q.a).length;
+    const pct = Math.round(correct / list.length * 100);
+    const groupBy = key => {
+      const m = {};
+      list.forEach(q => { const k = key(q); m[k] = m[k] || [0, 0]; m[k][1]++; if (answers[q.id] === q.a) m[k][0]++; });
+      return m;
+    };
+    return { correct, pct, bySection: groupBy(q => q.s), byType: groupBy(q => q.t) };
+  }
+
+  function showTestScore() {
+    const s = scoreSummary(TEST, testAnswers);
+    const missedTags = {};
+    TEST.forEach(q => { if (testAnswers[q.id] !== q.a) q.tags.forEach(t => missedTags[t] = (missedTags[t] || 0) + 1); });
+    const top = Object.entries(missedTags).sort((a, b) => b[1] - a[1]).slice(0, 8);
+    $("#testScore").innerHTML = `
+      <div><div class="big ${s.pct >= 80 ? "good-txt" : "bad-txt"}">${s.pct}%</div><div class="muted">${s.correct} / ${TEST.length} correct</div></div>
+      <div class="small">${Object.entries(s.bySection).map(([k, v]) => `${SECTIONS[k]}: <b>${v[0]}/${v[1]}</b>`).join("<br>")}</div>
+      <div class="small">${Object.entries(s.byType).map(([k, v]) => `${TYPE_LABEL[k]}: <b>${v[0]}/${v[1]}</b>`).join("<br>")}</div>
+      ${top.length ? `<div class="small"><b>Study these:</b><br>${top.map(([t, c]) => `${esc(t)} (${c})`).join("<br>")}</div>` : ""}`;
+    $("#testScore").classList.remove("hidden");
+  }
+
+  $("#submitTest").addEventListener("click", () => {
+    const unanswered = TEST.length - TEST.filter(q => testAnswers[q.id]).length;
+    if (unanswered && !confirm(`${unanswered} question(s) are unanswered and will be marked wrong. Grade anyway?`)) return;
+    TEST.forEach(q => { if (!testRevealed[q.id]) recordResult(q, testAnswers[q.id] === q.a); });
+    testGraded = true;
+    store.set("testGraded", true);
+    showTestScore();
+    renderTest();
+    window.scrollTo(0, 0);
+  });
+  $("#onlyMissed").addEventListener("click", () => { onlyMissed = !onlyMissed; renderTest(); });
+  $("#resetTest").addEventListener("click", () => {
+    if (!confirm("Clear all your test answers?")) return;
+    testAnswers = {}; testRevealed = {}; testGraded = false; onlyMissed = false;
+    store.set("testAnswers", testAnswers); store.set("testRevealed", testRevealed); store.set("testGraded", false);
+    $("#testScore").classList.add("hidden");
+    renderTest();
+  });
+  $("#sectionFilter").addEventListener("change", renderTest);
+  $("#instantCheck").addEventListener("change", e => store.set("instant", e.target.checked));
+
+  // =====================================================
+  // QUIZ MODE
+  // =====================================================
+  let quiz = store.get("quiz", { round: 0, ids: [], answers: {}, graded: false, last: [] });
+  let roundHistory = store.get("history", []);
+  let seen = store.get("seen", {});
+
+  function weakness(tag) {
+    const s = tagStats[tag];
+    return s ? Math.max(0, s.miss - 0.5 * s.right) : 0;
+  }
+
+  function pickRound() {
+    const avoid = new Set(quiz.ids);
+    const scored = QUESTIONS.filter(q => !avoid.has(q.id)).map(q => {
+      const weak = Math.max(0, ...q.tags.map(weakness));
+      const score = weak * 10 + (seen[q.id] ? 0 : 4) + Math.random() * 3;
+      return { q, weak, score };
+    });
+    scored.sort((a, b) => b.score - a.score);
+    const weakOnes = scored.filter(x => x.weak > 0).slice(0, 7).map(x => x.q);
+    const rest = shuffle(scored.filter(x => !weakOnes.includes(x.q)).slice(0, 30)).map(x => x.q);
+    return shuffle(weakOnes.concat(rest).slice(0, 10)).map(q => q.id);
+  }
+
+  function renderQuiz() {
+    const wrap = $("#quizContent");
+    wrap.innerHTML = "";
+    $("#roundInfo").textContent = quiz.round ? `Round ${quiz.round}` : "No round started yet.";
+    quiz.ids.forEach((id, i) => {
+      const q = byId[id];
+      const label = `${i + 1}. <span class="muted small">(${q.s === 5 ? "bonus " + q.id : "test Q" + q.id})</span>`;
+      wrap.appendChild(questionEl(q, "z", label, quiz.answers[id], quiz.graded));
+    });
+    const active = quiz.ids.length && !quiz.graded;
+    $("#gradeQuiz").classList.toggle("hidden", !active);
+    $("#nextRound").classList.toggle("hidden", !!active);
+    $("#nextRound").textContent = quiz.round ? "Next round (focus on weak terms)" : "Start round";
+    if (quiz.graded && quiz.ids.length) showQuizScore(); else $("#quizScore").classList.add("hidden");
+  }
+
+  function showQuizScore() {
+    const list = quiz.ids.map(id => byId[id]);
+    const correct = list.filter(q => quiz.answers[q.id] === q.a).length;
+    const missed = list.filter(q => quiz.answers[q.id] !== q.a);
+    const tags = [...new Set(missed.flatMap(q => q.tags))];
+    $("#quizScore").innerHTML = `
+      <div><div class="big ${correct >= 8 ? "good-txt" : "bad-txt"}">${correct}/10</div><div class="muted">Round ${quiz.round}</div></div>
+      <div class="small">${missed.length ? `<b>Missed:</b> ${missed.map(q => "#" + (quiz.ids.indexOf(q.id) + 1)).join(", ")}<br><b>Terms to review:</b> ${tags.map(esc).join(", ")}<br>Explanations are under each missed question.` : "<b>Perfect round.</b> Next round will mix in new questions."}</div>`;
+    $("#quizScore").classList.remove("hidden");
+  }
+
+  $("#quizContent").addEventListener("change", e => {
+    if (e.target.type !== "radio" || quiz.graded) return;
+    const id = e.target.name.slice(2);
+    quiz.answers[id] = e.target.value;
+    store.set("quiz", quiz);
+    $$(`#z-${CSS.escape(id)} .choice`).forEach(c => c.classList.toggle("selected", c.querySelector("input").checked));
+  });
+
+  $("#nextRound").addEventListener("click", () => {
+    quiz = { round: quiz.round + 1, ids: pickRound(), answers: {}, graded: false };
+    quiz.ids.forEach(id => seen[id] = true);
+    store.set("seen", seen);
+    store.set("quiz", quiz);
+    renderQuiz();
+    window.scrollTo(0, 0);
+  });
+
+  $("#gradeQuiz").addEventListener("click", () => {
+    const unanswered = quiz.ids.filter(id => !quiz.answers[id]).length;
+    if (unanswered) { alert(`Answer all 10 first (${unanswered} left).`); return; }
+    quiz.ids.forEach(id => recordResult(byId[id], quiz.answers[id] === byId[id].a));
+    quiz.graded = true;
+    const correct = quiz.ids.filter(id => quiz.answers[id] === byId[id].a).length;
+    roundHistory.push({ round: quiz.round, score: correct });
+    store.set("history", roundHistory);
+    store.set("quiz", quiz);
+    renderQuiz();
+    renderHistory();
+    window.scrollTo(0, 0);
+  });
+
+  function renderMissList() {
+    const rows = Object.entries(tagStats).filter(([, s]) => s.miss > 0)
+      .sort((a, b) => weakness(b[0]) - weakness(a[0]) || b[1].miss - a[1].miss);
+    $("#missList").innerHTML = rows.length
+      ? rows.map(([t, s]) => `<li><span>${esc(t)}${weakness(t) === 0 ? ' <span class="muted small">(fixed)</span>' : ""}</span><span class="count" title="missed / later correct">${s.miss} miss${s.miss === 1 ? "" : "es"}</span></li>`).join("")
+      : `<li class="empty-li">Nothing missed yet.</li>`;
+    const weakCount = rows.filter(([t]) => weakness(t) > 0).length;
+    $("#missBadge").textContent = weakCount;
+    $("#missBadge").classList.toggle("hidden", weakCount === 0);
+  }
+
+  function renderHistory() {
+    $("#roundHistory").innerHTML = roundHistory.length
+      ? roundHistory.slice().reverse().map(h => `<li><span>Round ${h.round}</span><b>${h.score}/10</b></li>`).join("")
+      : `<li class="empty-li">No rounds graded yet.</li>`;
+  }
+
+  $("#clearProgress").addEventListener("click", () => {
+    if (!confirm("Clear your miss list and round history?")) return;
+    tagStats = {}; roundHistory = []; seen = {};
+    quiz = { round: 0, ids: [], answers: {}, graded: false };
+    ["tagStats", "history", "seen", "quiz"].forEach(k => store.set(k, k === "history" ? [] : k === "quiz" ? quiz : {}));
+    renderMissList(); renderHistory(); renderQuiz();
+  });
+
+  // =====================================================
+  // CHEAT SHEET
+  // =====================================================
+  $("#cheatNote").textContent = CHEAT_NOTE;
+  $("#numbersNote").textContent = NUMBERS;
+  function renderCheat() {
+    const q = $("#cheatSearch").value.trim().toLowerCase();
+    const rows = CHEAT.filter(r => !q || r.join(" ").toLowerCase().includes(q));
+    $("#cheatBody").innerHTML = rows.length
+      ? rows.map(r => `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join("")
+      : `<tr><td colspan="3" class="muted">No matches.</td></tr>`;
+  }
+  $("#cheatSearch").addEventListener("input", renderCheat);
+
+  // ---------- init ----------
+  renderGuide();
+  renderTest();
+  if (testGraded) showTestScore();
+  renderQuiz();
+  renderMissList();
+  renderHistory();
+  renderCheat();
+  showView(location.hash.slice(1) || "guide");
+})();
+
+  </script>
+</body>
+</html>
